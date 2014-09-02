@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @question.content %>
+</p>
+
+<p>
+  <strong>Tip:</strong>
+  <%= @question.tip %>
+</p>
+
+<p>
+  <strong>Related resource:</strong>
+  <%= @question.related_resource %>
+</p>
+
+<p>
+  <strong>Set:</strong>
+  <%= @question.set %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @question.number %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @question.subject %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @question.source %>
+</p>
+
+<p>
+  <strong>Difficulty:</strong>
+  <%= @question.difficulty %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
