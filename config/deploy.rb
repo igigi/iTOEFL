@@ -44,12 +44,6 @@ set :rvm_ruby_version, 'ruby-2.1.2@myTOEFL'
 set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 SSHKit.config.command_map[:rake] = "#{fetch(:default_env)[:rvm_bin_path]}/rvm ruby-#{fetch(:rvm_ruby_version)} do bundle exec rake"
 
-# puma setting
-
-set :puma_bind, %w(tcp://0.0.0.0:9292 unix:///tmp/puma.sock)
-
-
-
 
 namespace :deploy do
 
