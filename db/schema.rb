@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902013557) do
+ActiveRecord::Schema.define(version: 20140903060413) do
+
+  create_table "question_histories", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.boolean  "is_correct"
+    t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_histories", ["question_id"], name: "index_question_histories_on_question_id", using: :btree
+  add_index "question_histories", ["user_id"], name: "index_question_histories_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "content"

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @question_history.user %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @question_history.question %>
+</p>
+
+<p>
+  <strong>Is correct:</strong>
+  <%= @question_history.is_correct %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @question_history.answer %>
+</p>
+
+<%= link_to 'Edit', edit_question_history_path(@question_history) %> |
+<%= link_to 'Back', question_histories_path %>
