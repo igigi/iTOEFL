@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @broadcast_set.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @broadcast_set.description %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= @broadcast_set.cover %>
+</p>
+
+<%= link_to 'Edit', edit_broadcast_set_path(@broadcast_set) %> |
+<%= link_to 'Back', broadcast_sets_path %>

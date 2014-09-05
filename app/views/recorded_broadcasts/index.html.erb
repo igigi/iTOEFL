@@ -1,0 +1,33 @@
+<h1>Listing recorded_broadcasts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Cover</th>
+      <th>Summary</th>
+      <th>Video url</th>
+      <th>Broadcast set</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recorded_broadcasts.each do |recorded_broadcast| %>
+      <tr>
+        <td><%= recorded_broadcast.title %></td>
+        <td><%= recorded_broadcast.cover %></td>
+        <td><%= recorded_broadcast.summary %></td>
+        <td><%= recorded_broadcast.video_url %></td>
+        <td><%= recorded_broadcast.broadcast_set %></td>
+        <td><%= link_to 'Show', recorded_broadcast %></td>
+        <td><%= link_to 'Edit', edit_recorded_broadcast_path(recorded_broadcast) %></td>
+        <td><%= link_to 'Destroy', recorded_broadcast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recorded broadcast', new_recorded_broadcast_path %>

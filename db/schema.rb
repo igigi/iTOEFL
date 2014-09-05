@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903060413) do
+ActiveRecord::Schema.define(version: 20140905082732) do
+
+  create_table "broadcast_sets", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "cover"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "question_histories", force: true do |t|
     t.integer  "user_id"
@@ -37,5 +45,28 @@ ActiveRecord::Schema.define(version: 20140903060413) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "rb_favorites", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "recorded_broadcast_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rb_favorites", ["recorded_broadcast_id"], name: "index_rb_favorites_on_recorded_broadcast_id", using: :btree
+  add_index "rb_favorites", ["user_id"], name: "index_rb_favorites_on_user_id", using: :btree
+
+  create_table "recorded_broadcasts", force: true do |t|
+    t.string   "title"
+    t.string   "cover"
+    t.text     "summary"
+    t.string   "video_url"
+    t.integer  "broadcast_set_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "rb_favorites_count", default: 0
+  end
+
+  add_index "recorded_broadcasts", ["broadcast_set_id"], name: "index_recorded_broadcasts_on_broadcast_set_id", using: :btree
 
 end

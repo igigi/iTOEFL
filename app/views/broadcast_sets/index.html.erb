@@ -1,0 +1,29 @@
+<h1>Listing broadcast_sets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Cover</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @broadcast_sets.each do |broadcast_set| %>
+      <tr>
+        <td><%= broadcast_set.title %></td>
+        <td><%= broadcast_set.description %></td>
+        <td><%= broadcast_set.cover %></td>
+        <td><%= link_to 'Show', broadcast_set %></td>
+        <td><%= link_to 'Edit', edit_broadcast_set_path(broadcast_set) %></td>
+        <td><%= link_to 'Destroy', broadcast_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Broadcast set', new_broadcast_set_path %>

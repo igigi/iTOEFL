@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @recorded_broadcast.title %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= @recorded_broadcast.cover %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @recorded_broadcast.summary %>
+</p>
+
+<p>
+  <strong>Video url:</strong>
+  <%= @recorded_broadcast.video_url %>
+</p>
+
+<p>
+  <strong>Broadcast set:</strong>
+  <%= @recorded_broadcast.broadcast_set %>
+</p>
+
+<%= link_to 'Edit', edit_recorded_broadcast_path(@recorded_broadcast) %> |
+<%= link_to 'Back', recorded_broadcasts_path %>

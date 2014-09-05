@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :broadcast_sets
+
+  resources :recorded_broadcasts
+
   resources :questions
 
   root :to => 'assets#index'
@@ -8,6 +12,9 @@ Rails.application.routes.draw do
   namespace :v1, defaults: {format: 'json'} do
     resources :questions
     resources :question_histories
+    resources :broadcast_sets
+    resources :recorded_broadcasts
+    resources :rb_favorites
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
