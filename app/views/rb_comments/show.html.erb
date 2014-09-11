@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @rb_comment.content %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @rb_comment.user %>
+</p>
+
+<p>
+  <strong>Recorded broadcast:</strong>
+  <%= @rb_comment.recorded_broadcast %>
+</p>
+
+<%= link_to 'Edit', edit_rb_comment_path(@rb_comment) %> |
+<%= link_to 'Back', rb_comments_path %>

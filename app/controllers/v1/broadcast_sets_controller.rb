@@ -1,13 +1,21 @@
 class V1::BroadcastSetsController < ApplicationController
-  before_action :set_broadcast_set, only: [:show, :edit, :update, :destroy]
+  before_action :set_broadcast_set, only: [:count, :show, :edit, :update, :destroy]
+
+  def count
+    if params[:counter] == "subscribe"
+      @recorded_broadcast.subscribe_count += 1
+      if @recorded_broadcast.save
+        head :no_content
+      end
+    end
+  end
 
   # GET /broadcast_sets
   # GET /broadcast_sets.json
   def index
-    @broadcast_sets = BroadcastSet.all
+    @broadcast_sets = BroadcastSet.paginate(page: params[:page])
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @broadcast_sets }
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905082732) do
+ActiveRecord::Schema.define(version: 20140911024403) do
 
   create_table "broadcast_sets", force: true do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140905082732) do
     t.string   "cover"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subscribe_count", default: 0
   end
 
   create_table "question_histories", force: true do |t|
@@ -46,6 +47,17 @@ ActiveRecord::Schema.define(version: 20140905082732) do
     t.datetime "updated_at"
   end
 
+  create_table "rb_comments", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "recorded_broadcast_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rb_comments", ["recorded_broadcast_id"], name: "index_rb_comments_on_recorded_broadcast_id", using: :btree
+  add_index "rb_comments", ["user_id"], name: "index_rb_comments_on_user_id", using: :btree
+
   create_table "rb_favorites", force: true do |t|
     t.integer  "user_id"
     t.integer  "recorded_broadcast_id"
@@ -65,8 +77,20 @@ ActiveRecord::Schema.define(version: 20140905082732) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rb_favorites_count", default: 0
+    t.integer  "play_count",         default: 0
+    t.integer  "subscribe_count",    default: 0
   end
 
   add_index "recorded_broadcasts", ["broadcast_set_id"], name: "index_recorded_broadcasts_on_broadcast_set_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "origin"
+    t.string   "open_id"
+    t.string   "password"
+    t.string   "auth_token"
+    t.string   "nickname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -10,11 +10,19 @@ Rails.application.routes.draw do
   get 'assets/index'
 
   namespace :v1, defaults: {format: 'json'} do
+    resources :users do
+      post 'login', on: :collection
+    end
     resources :questions
     resources :question_histories
-    resources :broadcast_sets
-    resources :recorded_broadcasts
+    resources :broadcast_sets do
+      get 'count', on: :member
+    end
+    resources :recorded_broadcasts do
+      get 'count', on: :member
+    end
     resources :rb_favorites
+    resources :rb_comments
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

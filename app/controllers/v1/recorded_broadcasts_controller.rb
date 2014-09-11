@@ -1,14 +1,25 @@
 class V1::RecordedBroadcastsController < ApplicationController
-  before_action :set_recorded_broadcast, only: [:show, :edit, :update, :destroy]
+  before_action :set_recorded_broadcast, only: [:count,:show, :edit, :update, :destroy]
+
+  #GET /recorded_broadcasts/1/count?counter=play
+  def count
+    if params[:counter] == "play"
+      @recorded_broadcast.play_count += 1
+      if @recorded_broadcast.save
+        head :no_content
+      end
+    elsif params[:counter] == "subscribe"
+      @recorded_broadcast.subscribe_count += 1
+      if @recorded_broadcast.save
+        head :no_content
+      end
+    end
+  end
 
   # GET /recorded_broadcasts
   # GET /recorded_broadcasts.json
   def index
-    if params[:broadcast_set_id]
-      @recorded_broadcasts = RecordedBroadcast.where(broadcast_set_id: params[:broadcast_set_id])
-    else 
-      @recorded_broadcasts = RecordedBroadcast.all
-    end
+    @recorded_broadcasts = RecordedBroadcast.where(broadcast_set_id: params[:broadcast_set_id])
 
     respond_to do |format|
       format.html # index.html.erb

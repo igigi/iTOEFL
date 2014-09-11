@@ -6,9 +6,9 @@ class V1::RbFavoritesController < ApplicationController
 
     respond_to do |format|
       if @rb_favorite.save
-        format.json { render head :created }
+        format.json { render json: @rb_favorite, status: :created }
       else
-        format.json { render json: @broadcast_set.errors, status: :unprocessable_entity }
+        format.json { render json: @rb_favorite.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -23,7 +23,7 @@ class V1::RbFavoritesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rb_favorite
-      @rb_favorite = RbFavorte.find(params[:id])
+      @rb_favorite = RbFavorite.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
