@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @lb_comment.content %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @lb_comment.user %>
+</p>
+
+<p>
+  <strong>Live broadcast:</strong>
+  <%= @lb_comment.live_broadcast %>
+</p>
+
+<%= link_to 'Edit', edit_lb_comment_path(@lb_comment) %> |
+<%= link_to 'Back', lb_comments_path %>

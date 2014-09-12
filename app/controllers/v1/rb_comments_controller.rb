@@ -38,7 +38,7 @@ class V1::RbCommentsController < ApplicationController
     respond_to do |format|
       if @rb_comment.save
         format.html { redirect_to @rb_comment, notice: 'Rb comment was successfully created.' }
-        format.json { render json: @rb_comment, status: :created }
+        format.json { head :no_content }
       else
         format.html { render action: 'new' }
         format.json { render json: @rb_comment.errors, status: :unprocessable_entity }

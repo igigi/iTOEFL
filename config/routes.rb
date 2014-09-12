@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :live_broadcasts
+  resources :lb_comments
+
   resources :broadcast_sets
 
   resources :recorded_broadcasts
@@ -23,6 +26,9 @@ Rails.application.routes.draw do
     end
     resources :rb_favorites
     resources :rb_comments
+    resources :live_broadcasts do
+      resources :lb_comments
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

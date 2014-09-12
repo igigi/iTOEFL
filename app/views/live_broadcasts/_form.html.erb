@@ -1,0 +1,41 @@
+<%= form_for(@live_broadcast) do |f| %>
+  <% if @live_broadcast.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@live_broadcast.errors.count, "error") %> prohibited this live_broadcast from being saved:</h2>
+
+      <ul>
+      <% @live_broadcast.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :cover %><br>
+    <%= f.text_field :cover %>
+  </div>
+  <div class="field">
+    <%= f.label :summary %><br>
+    <%= f.text_area :summary %>
+  </div>
+  <div class="field">
+    <%= f.label :video_url %><br>
+    <%= f.text_field :video_url %>
+  </div>
+  <div class="field">
+    <%= f.label :start_at %><br>
+    <%= f.datetime_select :start_at %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<h1>Listing live_broadcasts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Cover</th>
+      <th>Summary</th>
+      <th>Video url</th>
+      <th>Start at</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @live_broadcasts.each do |live_broadcast| %>
+      <tr>
+        <td><%= live_broadcast.title %></td>
+        <td><%= live_broadcast.cover %></td>
+        <td><%= live_broadcast.summary %></td>
+        <td><%= live_broadcast.video_url %></td>
+        <td><%= live_broadcast.start_at %></td>
+        <td><%= live_broadcast.status %></td>
+        <td><%= link_to 'Show', live_broadcast %></td>
+        <td><%= link_to 'Edit', edit_live_broadcast_path(live_broadcast) %></td>
+        <td><%= link_to 'Destroy', live_broadcast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Live broadcast', new_live_broadcast_path %>

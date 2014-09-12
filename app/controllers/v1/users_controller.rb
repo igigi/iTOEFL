@@ -3,7 +3,9 @@ class V1::UsersController < ApplicationController
 
   def login
     if user = User.find_by(open_id: params[:open_id])
-      if user.password == params[:password]
+      if user.origin == "qq" || user.origin == "weibo"
+        render json: user, status: :ok
+      elsif user.password == params[:password]
         render json: user, status: :ok
       else
         head 423
