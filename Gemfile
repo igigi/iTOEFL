@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org/'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -46,7 +46,7 @@ gem 'capistrano-rvm'
 # gem 'debugger', group: [:development, :test]
 
 
-gem "active_model_serializers"
+gem "active_model_serializers", "~> 0.8.0"
 gem "ember-rails", "~>0.14"
 gem "ember-source", "~>1.1"
 gem 'mysql2', "~>0.3.16"

@@ -11,7 +11,12 @@ class V1::UsersController < ApplicationController
         head 423
       end
     else
-      head 404
+      if params[:origin] == "qq" || params[:origin] == "weibo"
+        user = User.create(open_id: params[:open_id], nickname: params[:nickname])
+        render json: user, status: :ok
+      else
+        head 404
+      end
     end
   end
 
@@ -51,10 +56,8 @@ class V1::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created }
       else
-        format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @judgement.score %>
+</p>
+
+<p>
+  <strong>Mark:</strong>
+  <%= @judgement.mark %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @judgement.user %>
+</p>
+
+<%= link_to 'Edit', edit_judgement_path(@judgement) %> |
+<%= link_to 'Back', judgements_path %>

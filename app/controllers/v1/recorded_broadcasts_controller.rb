@@ -1,5 +1,6 @@
 class V1::RecordedBroadcastsController < ApplicationController
   before_action :set_recorded_broadcast, only: [:count,:show, :edit, :update, :destroy]
+  serialization_scope :current_user
 
   #GET /recorded_broadcasts/1/count?counter=play
   def count
@@ -89,6 +90,10 @@ class V1::RecordedBroadcastsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_recorded_broadcast
       @recorded_broadcast = RecordedBroadcast.find(params[:id])
+    end
+
+    def current_user
+      User.find_by(auth_token: request.headers["token"])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

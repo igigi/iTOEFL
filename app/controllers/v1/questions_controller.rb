@@ -1,13 +1,21 @@
 class V1::QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  serialization_scope :current_user
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    if params[:source] && params[:subject] && params[:set]
+      @questions = Question.by_source(params[:source]).by_subject(params[:subject]).by_set(params[:set]).ids
+    elsif params[:source] && params[:subject] && params[:number]
+      @questions = Question.by_source(params[:source]).by_subject(params[:subject]).by_number(params[:number]).ids
+    elsif params[:source] && params[:subject]
+      @questions = Question.by_source(params[:source]).by_subject(params[:subject]).order(:set).ids
+    else
+      @questions = {}
+    end
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @questions }
     end
   end
@@ -74,6 +82,9 @@ class V1::QuestionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = Question.find(params[:id])
+    end
+    def current_user
+      User.find_by(auth_token: request.headers["token"])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

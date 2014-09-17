@@ -3,8 +3,8 @@ class V1::BroadcastSetsController < ApplicationController
 
   def count
     if params[:counter] == "subscribe"
-      @recorded_broadcast.subscribe_count += 1
-      if @recorded_broadcast.save
+      @broadcast_set.subscribe_count += 1
+      if @broadcast_set.save
         head :no_content
       end
     end

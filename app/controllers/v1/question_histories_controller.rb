@@ -4,10 +4,13 @@ class V1::QuestionHistoriesController < ApplicationController
   # GET /question_histories
   # GET /question_histories.json
   def index
-    @question_histories = QuestionHistory.all
+    if params[:question_id]
+      @question_histories = QuestionHistory.other_history(params[:question_id], current_user.id).paginate(page: params[:page])
+    else
+      @question_histories = QuestionHistory.all
+    end
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @question_histories }
     end
   end

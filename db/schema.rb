@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911081402) do
+ActiveRecord::Schema.define(version: 20140917014419) do
+
+  create_table "add_questions", force: true do |t|
+    t.string   "content"
+    t.integer  "mark_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "add_questions", ["mark_id"], name: "index_add_questions_on_mark_id", using: :btree
+  add_index "add_questions", ["user_id"], name: "index_add_questions_on_user_id", using: :btree
 
   create_table "broadcast_sets", force: true do |t|
     t.string   "title"
@@ -21,6 +32,17 @@ ActiveRecord::Schema.define(version: 20140911081402) do
     t.datetime "updated_at"
     t.integer  "subscribe_count", default: 0
   end
+
+  create_table "judgements", force: true do |t|
+    t.integer  "score"
+    t.integer  "mark_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "judgements", ["mark_id"], name: "index_judgements_on_mark_id", using: :btree
+  add_index "judgements", ["user_id"], name: "index_judgements_on_user_id", using: :btree
 
   create_table "lb_comments", force: true do |t|
     t.text     "content"
@@ -42,7 +64,20 @@ ActiveRecord::Schema.define(version: 20140911081402) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "teacher"
+    t.datetime "end_at"
   end
+
+  create_table "marks", force: true do |t|
+    t.string   "content"
+    t.integer  "question_history_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "marks", ["question_history_id"], name: "index_marks_on_question_history_id", using: :btree
+  add_index "marks", ["user_id"], name: "index_marks_on_user_id", using: :btree
 
   create_table "question_histories", force: true do |t|
     t.integer  "user_id"
