@@ -1,6 +1,26 @@
 class V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def verify_mail
+    if user = User.find_by(open_id: params[:mail])
+      captcha = [*'0'..'9'].sample(6).join
+      user.update(captcha: captcha)
+      UserMailer.captcha_email(user).deliver
+
+      head :ok
+    else
+      head 404
+    end
+  end
+
+  def verify_captcha
+    if user = User.find_by(open_id: params[:mail]) && user.captcha == params[:captcha]
+      render json: user, status: :ok
+    else
+      head 423
+    end
+  end
+
   def login
     if user = User.find_by(open_id: params[:open_id])
       if user.origin == "qq" || user.origin == "weibo"
@@ -68,10 +88,8 @@ class V1::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

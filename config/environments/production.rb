@@ -79,4 +79,12 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.qq.com",
+    :port                 => 25,
+    :domain               => 'www.xiaoma.com',
+    :user_name            => 'noreply@xiaoma.com',
+    :password             => 'xiaomaguohe1q2w3e4r',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
 end

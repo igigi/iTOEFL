@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917014419) do
+ActiveRecord::Schema.define(version: 20140917103705) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20140917014419) do
     t.string   "nickname"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "captcha"
   end
 
 end

@@ -34,4 +34,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.qq.com",
+    :port                 => 25,
+    :domain               => 'www.xiaoma.com',
+    :user_name            => 'noreply@xiaoma.com',
+    :password             => 'xiaomaguohe1q2w3e4r',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
 end

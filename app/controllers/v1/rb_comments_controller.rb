@@ -4,7 +4,7 @@ class V1::RbCommentsController < ApplicationController
   # GET /rb_comments
   # GET /rb_comments.json
   def index
-    @rb_comments = RbComment.where(recorded_broadcast_id: params[:recorded_broadcast_id]).paginate(page: params[:page])
+    @rb_comments = RbComment.where(recorded_broadcast_id: params[:recorded_broadcast_id]).order(id: :desc).paginate(page: params[:page])
     
     respond_to do |format|
       format.html # index.html.erb
