@@ -14,8 +14,10 @@ class V1::UsersController < ApplicationController
   end
 
   def verify_captcha
-    if user = User.find_by(open_id: params[:mail]) && user.captcha == params[:captcha]
-      render json: user, status: :ok
+    if user = User.find_by(open_id: params[:mail])
+      if user.captcha == params[:captcha]
+        render json: user, status: :ok
+      end
     else
       head 423
     end
