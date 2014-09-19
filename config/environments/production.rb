@@ -83,8 +83,8 @@ Rails.application.configure do
     :address              => "smtp.qq.com",
     :port                 => 25,
     :domain               => 'www.xiaoma.com',
-    :user_name            => 'noreply@xiaoma.com',
-    :password             => 'xiaomaguohe1q2w3e4r',
+    :user_name            => 'noreplyxiaoma@xiaoma.com',
+    :password             => 'xiaoma1q2w3e4r',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 end
