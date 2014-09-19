@@ -5,10 +5,9 @@ class V1::LbCommentsController < ApplicationController
   # GET /lb_comments
   # GET /lb_comments.json
   def index
-    @lb_comments = @live_broadcast.lb_comments
+    @lb_comments = @live_broadcast.lb_comments.paginate(page: params[:page])
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @lb_comments }
     end
   end

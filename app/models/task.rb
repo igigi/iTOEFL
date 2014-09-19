@@ -1,4 +1,4 @@
-class QuestionHistory < ActiveRecord::Base
+class Task < ActiveRecord::Base
   belongs_to :user
   belongs_to :question
 

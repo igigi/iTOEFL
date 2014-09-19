@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917103705) do
+ActiveRecord::Schema.define(version: 20140919082052) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -70,26 +70,14 @@ ActiveRecord::Schema.define(version: 20140917103705) do
 
   create_table "marks", force: true do |t|
     t.string   "content"
-    t.integer  "question_history_id"
+    t.integer  "task_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "marks", ["question_history_id"], name: "index_marks_on_question_history_id", using: :btree
+  add_index "marks", ["task_id"], name: "index_marks_on_task_id", using: :btree
   add_index "marks", ["user_id"], name: "index_marks_on_user_id", using: :btree
-
-  create_table "question_histories", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.boolean  "is_correct"
-    t.string   "answer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "question_histories", ["question_id"], name: "index_question_histories_on_question_id", using: :btree
-  add_index "question_histories", ["user_id"], name: "index_question_histories_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "content"
@@ -139,6 +127,18 @@ ActiveRecord::Schema.define(version: 20140917103705) do
   end
 
   add_index "recorded_broadcasts", ["broadcast_set_id"], name: "index_recorded_broadcasts_on_broadcast_set_id", using: :btree
+
+  create_table "tasks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.boolean  "is_correct"
+    t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["question_id"], name: "index_tasks_on_question_id", using: :btree
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "origin"
