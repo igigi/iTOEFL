@@ -1,12 +1,15 @@
 class V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  def verify_mail
-    if user = User.find_by(open_id: params[:mail])
+  def verify_open_id
+    if user = User.find_by(open_id: params[:open_id])
       captcha = [*'0'..'9'].sample(6).join
       user.update(captcha: captcha)
-      UserMailer.captcha_email(user).deliver
-
+      if user.origin == "mail"
+        UserMailer.captcha_email(user).deliver
+      else
+        UserSms.captcha_sms(user)
+      end
       head :ok
     else
       head 404
@@ -17,6 +20,8 @@ class V1::UsersController < ApplicationController
     if user = User.find_by(open_id: params[:mail])
       if user.captcha == params[:captcha]
         render json: user, status: :ok
+      else
+        head 423
       end
     else
       head 423
@@ -88,12 +93,17 @@ class V1::UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.json { head :no_content }
-      else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+
+    if @user.captcha == user_params[:captcha]
+      respond_to do |format|
+          if @user.update(user_params)
+            format.json { head :no_content }
+          else
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
       end
+    else
+      head 423
     end
   end
 
@@ -115,6 +125,6 @@ class V1::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:origin, :open_id, :password, :auth_token, :nickname)
+      params.require(:user).permit(:captcha, :origin, :open_id, :password, :auth_token, :nickname)
     end
 end
