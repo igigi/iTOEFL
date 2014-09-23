@@ -2,8 +2,13 @@ class V1::BroadcastSetsController < ApplicationController
   before_action :set_broadcast_set, only: [:count, :show, :edit, :update, :destroy]
 
   def count
-    if params[:counter] == "subscribe"
+    if params[:counter] == "add"
       @broadcast_set.subscribe_count += 1
+      if @broadcast_set.save
+        head :no_content
+      end
+    else params[:counter] == "-"
+      @broadcast_set.subscribe_count -= 1
       if @broadcast_set.save
         head :no_content
       end

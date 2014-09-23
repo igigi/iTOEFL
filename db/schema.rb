@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919082052) do
+ActiveRecord::Schema.define(version: 20140922073641) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 20140919082052) do
     t.string   "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remark"
+    t.boolean  "share"
   end
 
   add_index "tasks", ["question_id"], name: "index_tasks_on_question_id", using: :btree

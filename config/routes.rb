@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       post 'verify_captcha', on: :collection
     end
     resources :questions
-    resources :question_histories
+    resources :tasks
     resources :broadcast_sets do
       get 'count', on: :member
     end

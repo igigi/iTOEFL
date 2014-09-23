@@ -61,6 +61,6 @@ class V1::TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:user_id, :question_id, :is_correct, :answer)
+      params.require(:task).permit(:user_id, :question_id, :is_correct, :answer, :remark, :share)
     end
 end
