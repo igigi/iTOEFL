@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :user
   belongs_to :question
+  has_many :marks
 
   def self.myself_history(q,u)
     where("question_id = ? AND user_id = ?", q, u)

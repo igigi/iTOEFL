@@ -10,7 +10,7 @@ class V1::QuestionsController < ApplicationController
     elsif params[:source] && params[:subject] && params[:number]
       @questions = Question.by_source(params[:source]).by_subject(params[:subject]).by_number(params[:number]).ids
     elsif params[:source] && params[:subject]
-      @questions = Question.by_source(params[:source]).by_subject(params[:subject]).order(:set).ids
+      @questions = Question.by_source(params[:source]).by_subject(params[:subject]).order(:set).pluck(:set).uniq
     else
       @questions = {}
     end
