@@ -1,6 +1,3 @@
 class TaskSerializer < ApplicationSerializer
-  attributes :id, :is_correct, :answer
-  def status
-    object.marks.empty? ? 0:1
-  end
+  attributes :id, :is_correct, :answer, :status
 end
