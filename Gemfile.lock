@@ -177,7 +177,6 @@ DEPENDENCIES
   ember-rails (~> 0.14)
   ember-source (~> 1.1)
   jbuilder (~> 2.0)
-  jquery-rails
   mysql2 (~> 0.3.16)
   puma (~> 2.9.0)
   rails (= 4.1.5)
