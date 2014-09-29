@@ -9,7 +9,7 @@ set :repo_url, 'git@github.com:igigi/iTOEFL.git'
 
 # Default deploy_to directory is /var/www/my_app
 # set :deploy_to, '/var/www/my_app'
-set :deploy_to, '/home/deploy/app_api'
+set :deploy_to, '/home/deploy/app_test'
 
 # Default value for :scm is :git
 # set :scm, :git
