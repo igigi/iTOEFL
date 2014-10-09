@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140928043758) do
+ActiveRecord::Schema.define(version: 20141008071814) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20140928043758) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "score"
   end
 
   add_index "marks", ["task_id"], name: "index_marks_on_task_id", using: :btree

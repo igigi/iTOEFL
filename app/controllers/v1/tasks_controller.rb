@@ -1,6 +1,20 @@
 class V1::TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  def task_top
+    question = Question.find(params[:question_id])
+
+    count = question.tasks.count
+    max = question.marks.maximum("score")
+    average = question.marks.average("score")
+
+    response = {count: count, max: max, average: average}
+    
+    render json: response
+    
+  end
+  
+
   def index
     if params[:question_id]
       @tasks = Task.other_history(params[:question_id], current_user.id).paginate(page: params[:page])

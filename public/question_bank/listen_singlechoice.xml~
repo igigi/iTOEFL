@@ -29,7 +29,6 @@
   </responseDeclaration>
   <outcomeDeclaration identifier="SCORE" cardinality="single" baseType="integer"/>
   <itemBody>
-<blockquote>
   <audio>
 	  <source src="horse.ogg" type="audio/ogg" />
 	  <source src="horse.mp3" type="audio/mpeg" />
@@ -40,7 +39,6 @@ teacher: Directions:In this section,you will hear 8 short conversations and 2 lo
     <p_b>
 student: questions will be spoken only onc
     </p_b>
-</blockquote>
     <audio>
 <source src="horse.ogg" type="audio/ogg" />
     </audio>

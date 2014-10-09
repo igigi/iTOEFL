@@ -39,7 +39,7 @@ class V1::UsersController < ApplicationController
       end
     else
       if params[:origin] == "qq" || params[:origin] == "weibo"
-        user = User.create(open_id: params[:open_id], nickname: params[:nickname])
+        user = User.create(open_id: params[:open_id], nickname: params[:nickname], origin: params[:origin])
         render json: user, status: :ok
       else
         head 404

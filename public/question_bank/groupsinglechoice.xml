@@ -29,6 +29,7 @@
   </responseDeclaration>
   <outcomeDeclaration identifier="SCORE" cardinality="single" baseType="integer"/>
   <itemBody>
+<blockquote>
     <p_en>
       Section A
       　　Directions:In this section,you will hear 8 short conversations and 2 long conversations. At the end of each conversation, one or more questions will be asked about what was said. Both the conversation and the questions will be spoken only once. After each question there will be a pause. During the pause,you must read the four choices marked A), B), C)and D), and decide which is the best answer. Then mark the corresponding letter on Answer Sheet 1 with a single line through the center.
@@ -37,16 +38,16 @@
       A部分
          路线：在本节中，你会听到8短对话和2个长对话。在每次通话结束时，一个或更多的问题会问到说了些什么。无论是对话和问题都将只有一次发言。每个问题后会有一个停顿。在暂停期间，您必须阅读四个选择标有A），B），C）和D），并决定哪个是最好的答案。然后标记在答题卡1对应的一封信，通过中心一行
     </p_ch>
+</blockquote>
+    <p>
+      Questions 9 to 11 are based on the conversation you have heard
+    </p>
+    <audio>
+<source src="horse.ogg" type="audio/ogg" />
+    </audio>
        
     <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="1">
-      <prompt></prompt>
-      <simpleChoice identifier="ChoiceA">Go to a place he has visited.</simpleChoice>
-      <simpleChoice identifier="ChoiceB">Make her own arrangements.</simpleChoice>
-      <simpleChoice identifier="ChoiceC">Consult a travel agent.</simpleChoice>
-      <simpleChoice identifier="ChoiceD">Join in a package tour.</simpleChoice>
-    </choiceInteraction>
-    <choiceInteraction responseIdentifier="RESPONSE1" shuffle="false" maxChoices="1">
-      <prompt></prompt>
+      <prompt>After each question there will be a pause</prompt>
       <simpleChoice identifier="ChoiceA">Go to a place he has visited.</simpleChoice>
       <simpleChoice identifier="ChoiceB">Make her own arrangements.</simpleChoice>
       <simpleChoice identifier="ChoiceC">Consult a travel agent.</simpleChoice>
@@ -55,25 +56,46 @@
     <p>
       Questions 9 to 11 are based on the conversation you have heard
     </p>
-    <mp3></mp3>
+    <audio>
+<source src="horse.ogg" type="audio/ogg" />
+    </audio>
+    <choiceInteraction responseIdentifier="RESPONSE1" shuffle="false" maxChoices="1">
+      <prompt>After each question there will be a pause</prompt>
+      <simpleChoice identifier="ChoiceA">Go to a place he has visited.</simpleChoice>
+      <simpleChoice identifier="ChoiceB">Make her own arrangements.</simpleChoice>
+      <simpleChoice identifier="ChoiceC">Consult a travel agent.</simpleChoice>
+      <simpleChoice identifier="ChoiceD">Join in a package tour.</simpleChoice>
+    </choiceInteraction>
+    <p>
+      Questions 9 to 11 are based on the conversation you have heard
+    </p>
+    <audio>
+<source src="horse.ogg" type="audio/ogg" />
+    </audio>
     <choiceInteraction responseIdentifier="RESPONSE2" shuffle="false" maxChoices="1">
-      <prompt></prompt>
+      <prompt>After each question there will be a pause</prompt>
       <simpleChoice identifier="ChoiceA">To look for a job as a salesperson.</simpleChoice>
       <simpleChoice identifier="ChoiceB">To have a talk with Miss Thompson.</simpleChoice>
       <simpleChoice identifier="ChoiceC">To place an order for some products.</simpleChoice>
       <simpleChoice identifier="ChoiceD">To complain about a faulty appliance.</simpleChoice>
     </choiceInteraction>
-    <p></p>
+    <p>During the pause,you must read the four choices marked</p>
+    <audio>
+<source src="horse.ogg" type="audio/ogg" />
+    </audio>
     <choiceInteraction responseIdentifier="RESPONSE3" shuffle="false" maxChoices="1">
-      <prompt></prompt>
+      <prompt>After each question there will be a pause</prompt>
       <simpleChoice identifier="ChoiceA">The person in charge is not in the office.</simpleChoice>
       <simpleChoice identifier="ChoiceB">Make her own arrangements.</simpleChoice>
       <simpleChoice identifier="ChoiceC">Consult a travel agent.</simpleChoice>
       <simpleChoice identifier="ChoiceD">Join in a package tour.</simpleChoice>
     </choiceInteraction>
-    <p></p>
+    <p>During the pause,you must read the four choices marked</p>
+    <audio>
+<source src="horse.ogg" type="audio/ogg" />
+    </audio>
     <choiceInteraction responseIdentifier="RESPONSE4" shuffle="false" maxChoices="1">
-      <prompt></prompt>
+      <prompt>After each question there will be a pause</prompt>
       <simpleChoice identifier="ChoiceA">0743,12536  extension 15.</simpleChoice>
       <simpleChoice identifier="ChoiceB">0743,38750  extension 15.</simpleChoice>
       <simpleChoice identifier="ChoiceC">0743,21653  extension 15.</simpleChoice>

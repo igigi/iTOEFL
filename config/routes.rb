@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   resources :live_broadcasts
 
   resources :lb_comments
@@ -21,7 +20,10 @@ Rails.application.routes.draw do
       post 'verify_captcha', on: :collection
     end
     resources :questions
-    resources :tasks
+
+    resources :tasks do
+      get 'task_top', on: :collection
+    end
     resources :broadcast_sets do
       get 'count', on: :member
     end

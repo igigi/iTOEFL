@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  has_many :tasks
+  has_many :marks, through: :tasks
 
   def self.by_set(set)
     where(set: set)
