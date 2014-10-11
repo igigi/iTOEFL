@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @opinion.content %>
+</p>
+
+<p>
+  <strong>Media url:</strong>
+  <%= @opinion.media_url %>
+</p>
+
+<p>
+  <strong>Seat:</strong>
+  <%= @opinion.seat %>
+</p>
+
+<p>
+  <strong>Discussion:</strong>
+  <%= @opinion.discussion %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @opinion.user %>
+</p>
+
+<%= link_to 'Edit', edit_opinion_path(@opinion) %> |
+<%= link_to 'Back', opinions_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008071814) do
+ActiveRecord::Schema.define(version: 20141010102747) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20141008071814) do
     t.datetime "updated_at"
     t.integer  "subscribe_count", default: 0
   end
+
+  create_table "discussions", force: true do |t|
+    t.string   "content"
+    t.string   "media_url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "media_type"
+    t.string   "media_length"
+  end
+
+  add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
 
   create_table "judgements", force: true do |t|
     t.integer  "score"
@@ -79,6 +91,23 @@ ActiveRecord::Schema.define(version: 20141008071814) do
 
   add_index "marks", ["task_id"], name: "index_marks_on_task_id", using: :btree
   add_index "marks", ["user_id"], name: "index_marks_on_user_id", using: :btree
+
+  create_table "opinions", force: true do |t|
+    t.string   "content"
+    t.string   "media_url"
+    t.integer  "seat"
+    t.integer  "discussion_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "owner_id"
+    t.string   "media_type"
+    t.string   "media_length"
+  end
+
+  add_index "opinions", ["discussion_id"], name: "index_opinions_on_discussion_id", using: :btree
+  add_index "opinions", ["owner_id"], name: "index_opinions_on_owner_id", using: :btree
+  add_index "opinions", ["user_id"], name: "index_opinions_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "content"

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :live_broadcasts
 
   resources :lb_comments
@@ -14,6 +13,11 @@ Rails.application.routes.draw do
   get 'assets/index'
 
   namespace :v1, defaults: {format: 'json'} do
+
+    resources :discussions do
+      resources :opinions
+    end
+      
     resources :users do
       post 'login', on: :collection
       post 'verify_open_id', on: :collection

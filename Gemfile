@@ -51,3 +51,6 @@ gem 'mysql2', "~>0.3.16"
 gem 'will_paginate', "~>3.0.7"
 #gem 'devise', "~>3.3.0"
 gem 'rest-client', "~>1.7.2"
+
+gem 'carrierwave'
+gem 'carrierwave-aliyun'
