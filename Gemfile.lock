@@ -84,6 +84,13 @@ GEM
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
+    coffee-rails (4.0.1)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.0)
+    coffee-script (2.3.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.8.0)
     colored (1.2)
     colorize (0.7.3)
     database_cleaner (1.3.0)
@@ -272,6 +279,8 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    turbolinks (2.3.0)
+      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -328,5 +337,6 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   therubyracer
+  turbolinks
   uglifier (>= 1.3.0)
   will_paginate (~> 3.0.7)
