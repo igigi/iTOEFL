@@ -1,11 +1,11 @@
 class V1::OpinionsController < ApplicationController
   before_action :set_opinion, only: [:show, :edit, :update, :destroy]
-  before_action :set_discussion, only: [:create, :update]
+  before_action :set_discussion, only: [:index, :create]
 
   # GET /opinions
   # GET /opinions.json
   def index
-    @opinions = Opinion.all
+    @opinions = @discussion.opinions.paginate(page: params[:page])
     render json: @opinions
   end
 
@@ -54,9 +54,8 @@ class V1::OpinionsController < ApplicationController
   # DELETE /opinions/1
   # DELETE /opinions/1.json
   def destroy
-    @opinion.destroy
+    @opinion.update(status: 0)
     respond_to do |format|
-      format.html { redirect_to opinions_url, notice: 'Opinion was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,6 +72,6 @@ class V1::OpinionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def opinion_params
-      params.require(:opinion).permit(:content, :media_url, :seat, :discussion_id, :user_id, :media_type, :media_length)
+      params.require(:opinion).permit(:content, :media_url, :seat, :discussion_id, :user_id, :media_type, :media_length,:owner_id)
     end
 end

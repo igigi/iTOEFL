@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010102747) do
+ActiveRecord::Schema.define(version: 20141015103020) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20141010102747) do
     t.datetime "updated_at"
     t.string   "media_type"
     t.string   "media_length"
+    t.integer  "favorite_count"
+    t.integer  "reply_count"
   end
 
   add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
@@ -103,6 +105,8 @@ ActiveRecord::Schema.define(version: 20141010102747) do
     t.integer  "owner_id"
     t.string   "media_type"
     t.string   "media_length"
+    t.string   "status"
+    t.integer  "favorite_count"
   end
 
   add_index "opinions", ["discussion_id"], name: "index_opinions_on_discussion_id", using: :btree
@@ -183,5 +187,17 @@ ActiveRecord::Schema.define(version: 20141010102747) do
     t.datetime "updated_at"
     t.string   "captcha"
   end
+
+  create_table "works", force: true do |t|
+    t.string   "standpoint"
+    t.string   "content"
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "works", ["question_id"], name: "index_works_on_question_id", using: :btree
+  add_index "works", ["user_id"], name: "index_works_on_user_id", using: :btree
 
 end

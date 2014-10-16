@@ -8,9 +8,7 @@
 	<outcomeDeclaration identifier="SCORE" cardinality="single" baseType="float"/>
 	<itemBody>
 		<p>Read this postcard from your English pen-friend, Sam.</p>
-                <p class="sample answer">Here is a postcard of my town. Please send me, postcard from your town.
-						What size is your</p>
-                <audio>
+
 	          <source src="horse.mp3" type="audio/mpeg" />
                 </audio>
 		<extendedTextInteraction responseIdentifier="RESPONSE" expectedLength="200">

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount GrapeSwaggerRails::Engine, at: "/doc"
+  
   resources :live_broadcasts
 
   resources :lb_comments
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   get 'assets/index'
 
   namespace :v1, defaults: {format: 'json'} do
+    resources :opinions
 
     resources :discussions do
       resources :opinions
@@ -43,6 +46,11 @@ Rails.application.routes.draw do
     resources :judgements
     resources :add_questions
   end
+
+  mount API::Base, at: "/"
+  
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -98,4 +106,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end

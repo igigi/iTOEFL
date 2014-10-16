@@ -2,6 +2,8 @@ class Question < ActiveRecord::Base
   has_many :tasks
   has_many :marks, through: :tasks
 
+  has_many :works
+
   def self.by_set(set)
     where(set: set)
   end
