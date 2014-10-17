@@ -12,6 +12,14 @@ development:
   host: localhost
   username: root
   password: xiaoma
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: iTOEFL
+  pool: 10
+  host: localhost
+  username: root
+  password: xiaoma
 #development:
 #  <<: *default
 #  database: db/development.sqlite3
