@@ -4,7 +4,7 @@ class V1::DiscussionsController < ApplicationController
   # GET /discussions
   # GET /discussions.json
   def index
-    @discussions = Discussion.all
+    @discussions = Discussion.all.paginate(page: params[:page])
     
     render json: @discussions
   end
@@ -30,7 +30,7 @@ class V1::DiscussionsController < ApplicationController
 
     respond_to do |format|
       if @discussion.save
-        format.json { head :no_content }
+        format.json { render json: @discussion }
       else
         format.html { render :new }
         format.json { render json: @discussion.errors, status: :unprocessable_entity }

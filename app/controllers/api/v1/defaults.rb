@@ -28,7 +28,7 @@ module API
         def current_user
           token = request.headers["token"]
           if token
-            @current_user = User.find(auth_token: token)
+            User.find_by(auth_token: token)
           else
             false
           end

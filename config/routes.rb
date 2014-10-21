@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     resources :discussions do
       resources :opinions
     end
+
+    resources :tasks do
+      resources :opinions
+    end
       
     resources :users do
       post 'login', on: :collection

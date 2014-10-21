@@ -1,11 +1,12 @@
 class V1::OpinionsController < ApplicationController
   before_action :set_opinion, only: [:show, :edit, :update, :destroy]
-  before_action :set_discussion, only: [:index, :create]
+ # before_action :set_discussion, only: [:index, :create]
+  before_action :load_replied
 
   # GET /opinions
   # GET /opinions.json
   def index
-    @opinions = @discussion.opinions.paginate(page: params[:page])
+    @opinions = @replied.opinions.paginate(page: params[:page])
     render json: @opinions
   end
 
@@ -26,11 +27,11 @@ class V1::OpinionsController < ApplicationController
   # POST /opinions
   # POST /opinions.json
   def create
-    @opinion = @discussion.opinions.build(opinion_params)
+    @opinion = @replied.opinions.build(opinion_params)
 
     respond_to do |format|
       if @opinion.save
-        format.json { head :no_content }
+        format.json { render json: @opinion }
       else
         format.json { render json: @opinion.errors, status: :unprocessable_entity }
       end
@@ -66,8 +67,9 @@ class V1::OpinionsController < ApplicationController
       @opinion = Opinion.find(params[:id])
     end
 
-    def set_discussion
-      @discussion = Discussion.find(params[:discussion_id])
+    def load_replied
+      klass = [Discussion, Task].detect { |c| params["#{c.name.underscore}_id"] }
+      @replied = klass.find(params["#{klass.name.underscore}_id"])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

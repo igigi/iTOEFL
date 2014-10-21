@@ -4,7 +4,11 @@ class V1::LiveBroadcastsController < ApplicationController
   # GET /live_broadcasts
   # GET /live_broadcasts.json
   def index
-    @live_broadcasts = LiveBroadcast.where.not(status: 3).order(start_at: :desc).paginate(page: params[:page])
+    if params[:origin] == "web"
+      @live_broadcasts = LiveBroadcast.order(start_at: :desc).limit(40)
+    else
+     @live_broadcasts = LiveBroadcast.where.not(status: 3).order(start_at: :desc).paginate(page: params[:page])
+   end
 
     respond_to do |format|
       format.html # index.html.erb

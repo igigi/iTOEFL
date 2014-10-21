@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015103020) do
+ActiveRecord::Schema.define(version: 20141020091535) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20141015103020) do
     t.string   "content"
     t.string   "media_url"
     t.integer  "seat"
-    t.integer  "discussion_id"
+    t.integer  "replied_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -107,10 +107,11 @@ ActiveRecord::Schema.define(version: 20141015103020) do
     t.string   "media_length"
     t.string   "status"
     t.integer  "favorite_count"
+    t.string   "replied_type"
   end
 
-  add_index "opinions", ["discussion_id"], name: "index_opinions_on_discussion_id", using: :btree
   add_index "opinions", ["owner_id"], name: "index_opinions_on_owner_id", using: :btree
+  add_index "opinions", ["replied_id"], name: "index_opinions_on_replied_id", using: :btree
   add_index "opinions", ["user_id"], name: "index_opinions_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
@@ -187,6 +188,21 @@ ActiveRecord::Schema.define(version: 20141015103020) do
     t.datetime "updated_at"
     t.string   "captcha"
   end
+
+  create_table "votes", force: true do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
   create_table "works", force: true do |t|
     t.string   "standpoint"

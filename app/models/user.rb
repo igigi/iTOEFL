@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   before_create :set_auth_token
 
+  acts_as_voter
+
   private
 
     def set_auth_token	

@@ -14,15 +14,21 @@
 			<value>0</value>
 		</defaultValue>
 	</outcomeDeclaration>
+
 	<itemBody>
-		<p>word</p>
-		<p>
-            <audio>
-            	<url>word.mp3</url>
-            </audio>
-		</p>
+
+        <explanation>
+          n.单词,话语,诺言,消息;vt.措辞,用词,用言语表达;vi.讲话
+        </explanation>
+        <symbols>
+          [wɜ:rd]
+        </symbols>
+
+	<audio>
+          <url>word.mp3</url>
+        </audio>
 		<choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="1">
-			<prompt>What does it say?</prompt>
+			<prompt>word</prompt>
 			<simpleChoice identifier="A">You must stay with your luggage at all times.</simpleChoice>
 			<simpleChoice identifier="B">Do not let someone else look after your luggage.</simpleChoice>
 			<simpleChoice identifier="C">Remember your luggage when you leave.</simpleChoice>
