@@ -7,6 +7,14 @@ module API
       mount API::V1::Questions
       mount API::V1::Favorites
       mount API::V1::Squares
+      mount API::V1::Reports
+      mount API::V1::GrammarTypes
+      mount API::V1::GrammarGroups
+      mount API::V1::VocabularyGroups
+      mount API::V1::Articles
+      mount API::V1::ArticleMarks
+      mount API::V1::OralGroups
+      mount API::V1::OralResults
 
       add_swagger_documentation(
         api_version: "v1",

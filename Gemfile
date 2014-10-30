@@ -84,3 +84,5 @@ gem "grape-swagger-rails"
 gem "rack-cors", require: "rack/cors"
 
 gem 'acts_as_votable', '~> 0.10.0'
+
+#gem 'protected_attributes'

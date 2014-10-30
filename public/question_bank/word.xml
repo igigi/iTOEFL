@@ -32,6 +32,7 @@
 			<simpleChoice identifier="A">You must stay with your luggage at all times.</simpleChoice>
 			<simpleChoice identifier="B">Do not let someone else look after your luggage.</simpleChoice>
 			<simpleChoice identifier="C">Remember your luggage when you leave.</simpleChoice>
+			<simpleChoice identifier="D">Remember your luggage when you leave.</simpleChoice>
 		</choiceInteraction>
 	</itemBody>
 	<responseProcessing

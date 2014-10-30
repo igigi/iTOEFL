@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   has_many :marks, through: :tasks
 
   has_many :works

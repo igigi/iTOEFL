@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sequence number:</strong>
+  <%= @grammar_group.sequence_number %>
+</p>
+
+<p>
+  <strong>Group type:</strong>
+  <%= @grammar_group.group_type %>
+</p>
+
+<%= link_to 'Edit', edit_grammar_group_path(@grammar_group) %> |
+<%= link_to 'Back', grammar_groups_path %>

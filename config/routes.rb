@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+
+
   mount GrapeSwaggerRails::Engine, at: "/doc"
+
+  resources :grammar_questions
+
+  resources :grammar_groups
   
   resources :live_broadcasts
 
@@ -15,6 +21,8 @@ Rails.application.routes.draw do
   get 'assets/index'
 
   namespace :v1, defaults: {format: 'json'} do
+    resources :article_marks
+    
     resources :opinions
 
     resources :discussions do

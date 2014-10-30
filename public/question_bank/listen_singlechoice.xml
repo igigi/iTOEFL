@@ -5,6 +5,7 @@
   <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="identifier">
     <correctResponse>
       <value>ChoiceA</value>
+      <value>ChoiceB</value>
     </correctResponse>
   </responseDeclaration>
   <responseDeclaration identifier="RESPONSE1" cardinality="single" baseType="identifier">
@@ -22,9 +23,22 @@
       <value>ChoiceA</value>
     </correctResponse>
   </responseDeclaration>
-  <responseDeclaration identifier="RESPONSE4" cardinality="single" baseType="identifier">
+
+
+       <responseDeclaration identifier="RESPONSE3" cardinality="multiple" baseType="directedPair">
+        <correctResponse>
+            <value>F G1</value>
+            <value>S G1</value>
+            <value>C G2</value>
+            <value>H G3</value>
+        </correctResponse>
+    </responseDeclaration>
+
+      <responseDeclaration identifier="RESPONSE4" cardinality="ordered" baseType="identifier">
     <correctResponse>
-      <value>ChoiceA</value>
+      <value>DriverC</value>
+      <value>DriverA</value>
+      <value>DriverB</value>
     </correctResponse>
   </responseDeclaration>
   <outcomeDeclaration identifier="SCORE" cardinality="single" baseType="integer"/>
@@ -47,7 +61,7 @@ student: questions will be spoken only onc
     <p>
           Answer Sheet 1 with a single line through the center
     </p>
-    <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="1">
+    <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="2">
      <prompt>After each question there will be a pause</prompt>
       <simpleChoice identifier="ChoiceA">Go to a place he has visited.</simpleChoice>
       <simpleChoice identifier="ChoiceB">Make her own arrangements.</simpleChoice>
@@ -82,6 +96,24 @@ student: questions will be spoken only onc
       <simpleChoice identifier="ChoiceC">To place an order for some products.</simpleChoice>
       <simpleChoice identifier="ChoiceD">To complain about a faulty appliance.</simpleChoice>
     </choiceInteraction>
+
+        <gapMatchInteraction responseIdentifier="RESPONSE3" shuffle="true">
+       <gapText identifier="F" matchMax="1">family</gapText>
+       <gapText identifier="C" matchMax="1">castle</gapText>
+       <gapText identifier="S" matchMax="1">sword</gapText>
+       <gapText identifier="H" matchMax="1">horse</gapText>
+       <blockquote>
+          <p>He killed her <gap identifier="G1"/> and burned her <gap identifier="G2"/>, then jumped on her <gap identifier="G3"/> and rode away.</p>
+       </blockquote>
+    </gapMatchInteraction>
+
+        <orderInteraction responseIdentifier="RESPONSE4" shuffle="true">
+      <prompt>The following F1 drivers finished on the podium in the first ever Grand Prix of
+        Bahrain. Can you rearrange them into the correct finishing order?</prompt>
+      <simpleChoice identifier="DriverA">Rubens Barrichello</simpleChoice>
+      <simpleChoice identifier="DriverB">Jenson Button</simpleChoice>
+      <simpleChoice identifier="DriverC" fixed="true">Michael Schumacher</simpleChoice>
+    </orderInteraction>
 
   </itemBody>
   <responseProcessing

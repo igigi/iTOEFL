@@ -2,7 +2,10 @@ class User < ActiveRecord::Base
   validates :open_id, uniqueness: true
 
   has_many :rb_favorites, dependent: :destroy
-  has_many :question_histories, dependent: :destroy
+  has_many :tasks, dependent: :destroy
+
+  has_many :discussions, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   before_create :set_auth_token
 

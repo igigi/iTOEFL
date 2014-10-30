@@ -1,7 +1,7 @@
 class V1::OpinionsController < ApplicationController
   before_action :set_opinion, only: [:show, :edit, :update, :destroy]
  # before_action :set_discussion, only: [:index, :create]
-  before_action :load_replied
+  before_action :load_replied, except: [:destroy]
 
   # GET /opinions
   # GET /opinions.json

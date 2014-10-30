@@ -9,6 +9,7 @@
 	<itemBody>
 		<p>Read this postcard from your English pen-friend, Sam.</p>
 
+              <audio>
 	          <source src="horse.mp3" type="audio/mpeg" />
                 </audio>
 		<extendedTextInteraction responseIdentifier="RESPONSE" expectedLength="200">

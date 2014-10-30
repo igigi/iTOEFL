@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sequence number:</strong>
+  <%= @grammar_question.sequence_number %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @grammar_question.content %>
+</p>
+
+<p>
+  <strong>Grammar group:</strong>
+  <%= @grammar_question.grammar_group %>
+</p>
+
+<%= link_to 'Edit', edit_grammar_question_path(@grammar_question) %> |
+<%= link_to 'Back', grammar_questions_path %>

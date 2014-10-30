@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020091535) do
+ActiveRecord::Schema.define(version: 20141029095545) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -23,6 +23,27 @@ ActiveRecord::Schema.define(version: 20141020091535) do
 
   add_index "add_questions", ["mark_id"], name: "index_add_questions_on_mark_id", using: :btree
   add_index "add_questions", ["user_id"], name: "index_add_questions_on_user_id", using: :btree
+
+  create_table "article_marks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.string   "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "article_marks", ["article_id"], name: "index_article_marks_on_article_id", using: :btree
+  add_index "article_marks", ["user_id"], name: "index_article_marks_on_user_id", using: :btree
+
+  create_table "articles", force: true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "broadcast_sets", force: true do |t|
     t.string   "title"
@@ -46,6 +67,31 @@ ActiveRecord::Schema.define(version: 20141020091535) do
   end
 
   add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
+
+  create_table "grammar_groups", force: true do |t|
+    t.string   "sequence_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "grammar_type_id"
+  end
+
+  add_index "grammar_groups", ["grammar_type_id"], name: "index_grammar_groups_on_grammar_type_id", using: :btree
+
+  create_table "grammar_questions", force: true do |t|
+    t.string   "sequence_number"
+    t.text     "content"
+    t.integer  "grammar_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "grammar_questions", ["grammar_group_id"], name: "index_grammar_questions_on_grammar_group_id", using: :btree
+
+  create_table "grammar_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "judgements", force: true do |t|
     t.integer  "score"
@@ -82,6 +128,17 @@ ActiveRecord::Schema.define(version: 20141020091535) do
     t.datetime "end_at"
   end
 
+  create_table "mark_tips", force: true do |t|
+    t.integer  "start_index"
+    t.integer  "end_index"
+    t.string   "audio_url"
+    t.integer  "article_mark_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mark_tips", ["article_mark_id"], name: "index_mark_tips_on_article_mark_id", using: :btree
+
   create_table "marks", force: true do |t|
     t.string   "content"
     t.integer  "task_id"
@@ -114,8 +171,36 @@ ActiveRecord::Schema.define(version: 20141020091535) do
   add_index "opinions", ["replied_id"], name: "index_opinions_on_replied_id", using: :btree
   add_index "opinions", ["user_id"], name: "index_opinions_on_user_id", using: :btree
 
+  create_table "oral_groups", force: true do |t|
+    t.string   "sequence_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  create_table "oral_questions", force: true do |t|
+    t.string   "sequence_number"
+    t.string   "data_url"
+    t.text     "original_text"
+    t.integer  "oral_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "oral_questions", ["oral_group_id"], name: "index_oral_questions_on_oral_group_id", using: :btree
+
+  create_table "oral_results", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "oral_group_id"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "oral_results", ["user_id"], name: "index_oral_results_on_user_id", using: :btree
+
   create_table "questions", force: true do |t|
-    t.string   "content"
+    t.text     "content"
     t.string   "tip"
     t.string   "related_resource"
     t.string   "subject"
@@ -163,6 +248,17 @@ ActiveRecord::Schema.define(version: 20141020091535) do
 
   add_index "recorded_broadcasts", ["broadcast_set_id"], name: "index_recorded_broadcasts_on_broadcast_set_id", using: :btree
 
+  create_table "reports", force: true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.integer  "reportable_id"
+    t.string   "reportable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reports", ["user_id"], name: "index_reports_on_user_id", using: :btree
+
   create_table "tasks", force: true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -188,6 +284,23 @@ ActiveRecord::Schema.define(version: 20141020091535) do
     t.datetime "updated_at"
     t.string   "captcha"
   end
+
+  create_table "vocabulary_groups", force: true do |t|
+    t.string   "sequence_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vocabulary_questions", force: true do |t|
+    t.string   "sequence_number"
+    t.text     "content"
+    t.integer  "vocabulary_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "word"
+  end
+
+  add_index "vocabulary_questions", ["vocabulary_group_id"], name: "index_vocabulary_questions_on_vocabulary_group_id", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

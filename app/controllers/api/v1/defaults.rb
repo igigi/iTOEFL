@@ -18,22 +18,20 @@ module API
           def logger
             Rails.logger
           end
-        end
 
-      helpers do  
-        def authenticate!
-          error!('Unauthorized. Invalid or expired token.', 401) unless current_user
-        end
+          def authenticate!
+            error!('Unauthorized. Invalid or expired token.', 401) unless current_user
+          end
 
-        def current_user
-          token = request.headers["token"]
-          if token
-            User.find_by(auth_token: token)
-          else
-            false
+          def current_user
+            token = params[:token]
+            if token
+              User.find_by(auth_token: token)
+            else
+              false
+            end
           end
         end
-      end  
 
         rescue_from ActiveRecord::RecordNotFound do |e|
           error_response(message: e.message, status: 404)
