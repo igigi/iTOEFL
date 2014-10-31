@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029095545) do
+ActiveRecord::Schema.define(version: 20141031062336) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -89,6 +89,25 @@ ActiveRecord::Schema.define(version: 20141029095545) do
 
   create_table "grammar_types", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jinghua_answers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "jinghua_question_id"
+    t.string   "content"
+    t.string   "is_shared"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jinghua_answers", ["jinghua_question_id"], name: "index_jinghua_answers_on_jinghua_question_id", using: :btree
+  add_index "jinghua_answers", ["user_id"], name: "index_jinghua_answers_on_user_id", using: :btree
+
+  create_table "jinghua_questions", force: true do |t|
+    t.text     "content"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -176,6 +195,7 @@ ActiveRecord::Schema.define(version: 20141029095545) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "data_url"
   end
 
   create_table "oral_questions", force: true do |t|

@@ -17,6 +17,11 @@ module API
             user_id: params[:user_id]
           })
         end
+
+        desc "get a article to mark"
+        get "get_one" do
+          Article.grap_one
+        end
       end
     end
   end

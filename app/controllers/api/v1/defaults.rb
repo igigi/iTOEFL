@@ -24,7 +24,7 @@ module API
           end
 
           def current_user
-            token = params[:token]
+            token = request.headers["Authorization"]
             if token
               User.find_by(auth_token: token)
             else

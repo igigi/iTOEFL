@@ -13,7 +13,7 @@ module API
 
         desc "Return a oral group"
 
-        get ":id" do
+        get ":id", root: :oral_questions do
           OralGroup.find(params[:id]).oral_questions
         end
       end
