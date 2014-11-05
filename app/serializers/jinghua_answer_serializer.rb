@@ -1,3 +1,7 @@
 class JinghuaAnswerSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :content, :user
+
+  def user
+  	object.user.profile
+  end
 end

@@ -15,6 +15,19 @@ module API
       mount API::V1::ArticleMarks
       mount API::V1::OralGroups
       mount API::V1::OralResults
+      mount API::V1::JinghuaQuestions
+      mount API::V1::JinghuaAnswers
+      mount API::V1::Profiles
+      mount API::V1::Feedbacks
+      mount API::V1::ReproductionQuestions
+      mount API::V1::ReproductionResults
+      mount API::V1::OralOrigins
+      mount API::V1::Oral2Results
+      mount API::V1::JijingGroups
+      mount API::V1::JijingTasks
+      mount API::V1::JijingAnswers
+      mount API::V1::JijingMarks
+      mount API::V1::JinghuaMarks
 
       add_swagger_documentation(
         api_version: "v1",

@@ -12,6 +12,7 @@ module API
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
+          authenticate!
           result = OralResult.find_or_initialize_by(user_id: params[:user_id], oral_group_id: params[:oral_group_id])
           result.update(score: params[:score])
           nil

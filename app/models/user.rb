@@ -1,6 +1,15 @@
 class User < ActiveRecord::Base
   validates :open_id, uniqueness: true
 
+  has_many :jijing_answers
+
+  has_many :jinghua_answers
+
+  has_one :profile
+  has_many :feedbacks
+
+  has_many :reproduction_results
+
   has_many :rb_favorites, dependent: :destroy
   has_many :tasks, dependent: :destroy
 

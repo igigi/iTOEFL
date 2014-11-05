@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031062336) do
+ActiveRecord::Schema.define(version: 20141105060804) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -54,6 +54,23 @@ ActiveRecord::Schema.define(version: 20141031062336) do
     t.integer  "subscribe_count", default: 0
   end
 
+  create_table "dictation_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dictation_questions", force: true do |t|
+    t.string   "audio_url"
+    t.text     "sample"
+    t.integer  "dictation_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sequence_number"
+  end
+
+  add_index "dictation_questions", ["dictation_group_id"], name: "index_dictation_questions_on_dictation_group_id", using: :btree
+
   create_table "discussions", force: true do |t|
     t.string   "content"
     t.string   "media_url"
@@ -67,6 +84,18 @@ ActiveRecord::Schema.define(version: 20141031062336) do
   end
 
   add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
+
+  create_table "feedbacks", force: true do |t|
+    t.text     "content"
+    t.string   "device"
+    t.string   "system"
+    t.string   "version"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
 
   create_table "grammar_groups", force: true do |t|
     t.string   "sequence_number"
@@ -93,6 +122,69 @@ ActiveRecord::Schema.define(version: 20141031062336) do
     t.datetime "updated_at"
   end
 
+  create_table "jijing_answers", force: true do |t|
+    t.integer  "jijing_question_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.string   "is_shared"
+    t.string   "remark"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jijing_answers", ["jijing_question_id"], name: "index_jijing_answers_on_jijing_question_id", using: :btree
+  add_index "jijing_answers", ["user_id"], name: "index_jijing_answers_on_user_id", using: :btree
+
+  create_table "jijing_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jijing_marks", force: true do |t|
+    t.string   "content"
+    t.integer  "jijing_answer_id"
+    t.integer  "user_id"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jijing_marks", ["jijing_answer_id"], name: "index_jijing_marks_on_jijing_answer_id", using: :btree
+  add_index "jijing_marks", ["user_id"], name: "index_jijing_marks_on_user_id", using: :btree
+
+  create_table "jijing_questions", force: true do |t|
+    t.string   "sequence_number"
+    t.integer  "jijing_task_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "analysis"
+  end
+
+  add_index "jijing_questions", ["jijing_task_id"], name: "index_jijing_questions_on_jijing_task_id", using: :btree
+
+  create_table "jijing_tasks", force: true do |t|
+    t.string   "name"
+    t.integer  "jijing_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jijing_tasks", ["jijing_group_id"], name: "index_jijing_tasks_on_jijing_group_id", using: :btree
+
+  create_table "jijing_works", force: true do |t|
+    t.string   "sequence_number"
+    t.integer  "jijing_group_id"
+    t.text     "content"
+    t.string   "content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jijing_works", ["jijing_group_id"], name: "index_jijing_works_on_jijing_group_id", using: :btree
+
   create_table "jinghua_answers", force: true do |t|
     t.integer  "user_id"
     t.integer  "jinghua_question_id"
@@ -100,16 +192,31 @@ ActiveRecord::Schema.define(version: 20141031062336) do
     t.string   "is_shared"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remark"
+    t.string   "status"
   end
 
   add_index "jinghua_answers", ["jinghua_question_id"], name: "index_jinghua_answers_on_jinghua_question_id", using: :btree
   add_index "jinghua_answers", ["user_id"], name: "index_jinghua_answers_on_user_id", using: :btree
 
-  create_table "jinghua_questions", force: true do |t|
-    t.text     "content"
-    t.string   "type"
+  create_table "jinghua_marks", force: true do |t|
+    t.string   "content"
+    t.integer  "jinghua_answer_id"
+    t.integer  "user_id"
+    t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  add_index "jinghua_marks", ["jinghua_answer_id"], name: "index_jinghua_marks_on_jinghua_answer_id", using: :btree
+  add_index "jinghua_marks", ["user_id"], name: "index_jinghua_marks_on_user_id", using: :btree
+
+  create_table "jinghua_questions", force: true do |t|
+    t.text     "content"
+    t.string   "content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "analysis"
   end
 
   create_table "judgements", force: true do |t|
@@ -190,17 +297,37 @@ ActiveRecord::Schema.define(version: 20141031062336) do
   add_index "opinions", ["replied_id"], name: "index_opinions_on_replied_id", using: :btree
   add_index "opinions", ["user_id"], name: "index_opinions_on_user_id", using: :btree
 
+  create_table "oral2_results", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "oral_group_id"
+    t.integer  "score"
+    t.text     "audio"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "oral2_results", ["oral_group_id"], name: "index_oral2_results_on_oral_group_id", using: :btree
+  add_index "oral2_results", ["user_id"], name: "index_oral2_results_on_user_id", using: :btree
+
   create_table "oral_groups", force: true do |t|
     t.string   "sequence_number"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
     t.string   "data_url"
+    t.integer  "oral_origin_id"
+  end
+
+  add_index "oral_groups", ["oral_origin_id"], name: "index_oral_groups_on_oral_origin_id", using: :btree
+
+  create_table "oral_origins", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "oral_questions", force: true do |t|
     t.string   "sequence_number"
-    t.string   "data_url"
     t.text     "original_text"
     t.integer  "oral_group_id"
     t.datetime "created_at"
@@ -218,6 +345,19 @@ ActiveRecord::Schema.define(version: 20141031062336) do
   end
 
   add_index "oral_results", ["user_id"], name: "index_oral_results_on_user_id", using: :btree
+
+  create_table "profiles", force: true do |t|
+    t.string   "avatar"
+    t.string   "nickname"
+    t.string   "gender"
+    t.string   "grade"
+    t.string   "phone"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.text     "content"
@@ -278,6 +418,34 @@ ActiveRecord::Schema.define(version: 20141031062336) do
   end
 
   add_index "reports", ["user_id"], name: "index_reports_on_user_id", using: :btree
+
+  create_table "reproduction_questions", force: true do |t|
+    t.text     "content"
+    t.string   "sequence_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reproduction_results", force: true do |t|
+    t.integer  "score"
+    t.integer  "reproduction_question_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reproduction_results", ["reproduction_question_id"], name: "index_reproduction_results_on_reproduction_question_id", using: :btree
+  add_index "reproduction_results", ["user_id"], name: "index_reproduction_results_on_user_id", using: :btree
+
+  create_table "reproduction_samples", force: true do |t|
+    t.text     "en"
+    t.text     "ch"
+    t.integer  "reproduction_question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reproduction_samples", ["reproduction_question_id"], name: "index_reproduction_samples_on_reproduction_question_id", using: :btree
 
   create_table "tasks", force: true do |t|
     t.integer  "user_id"
@@ -340,13 +508,13 @@ ActiveRecord::Schema.define(version: 20141031062336) do
   create_table "works", force: true do |t|
     t.string   "standpoint"
     t.string   "content"
-    t.integer  "question_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "jijing_work_id"
   end
 
-  add_index "works", ["question_id"], name: "index_works_on_question_id", using: :btree
+  add_index "works", ["jijing_work_id"], name: "index_works_on_jijing_work_id", using: :btree
   add_index "works", ["user_id"], name: "index_works_on_user_id", using: :btree
 
 end

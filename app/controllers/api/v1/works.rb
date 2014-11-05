@@ -9,33 +9,34 @@ module API
         params do
           requires :standpoint, type: String, desc: "work stantpoint 0,1,-1"
           requires :content, type: String, desc: "work content"
-          requires :question_id, type: Integer, desc: "question ID"
+          requires :jijing_work_id, type: Integer, desc: "question ID"
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
           Work.create!({
             standpoint: params[:standpoint],
             content: params[:content],
-            question_id: params[:question_id],
+            question_id: params[:jijing_work_id],
             user_id: params[:user_id]
           })
         end
 
         desc "Return 10 works per page"
         params do
-          requires :question_id, type: Integer, desc: "ID of question"
+          requires :jijing_work_id, type: Integer, desc: "ID of question"
           requires :page, type: String, desc: "page number"
         end
         get "", root: :works do
-          Question.find(params[:question_id]).works.order("id desc").paginate(page: params[:page], per_page: 10)
+          JijingWork.find(params[:jijing_work_id]).works.order("id desc").paginate(page: params[:page], per_page: 10)
         end
 
         desc "Return works statistics infomation"
         params do
-          requires :question_id, type:Integer, desc: "ID of question"
+          requires :jijing_work_id, type:Integer, desc: "ID of question"
         end
         get "statistics" do
-          {agree: "#{Work.where(standpoint: 1).count}", disagree: "#{Work.where(standpoint: -1).count}", neutral: "#{Work.where(standpoint: 0).count}"}
+          jijing_work = JijingWork.find(params[:jijing_work_id])
+          {agree: "#{jijing_work.works.where(standpoint: 1).count}", disagree: "#{jijing_work.works.where(standpoint: -1).count}", neutral: "#{jijing_work.works.where(standpoint: 0).count}"}
         end
       end
     end
