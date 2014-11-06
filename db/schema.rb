@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105060804) do
+ActiveRecord::Schema.define(version: 20141106085041) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -165,6 +165,17 @@ ActiveRecord::Schema.define(version: 20141105060804) do
 
   add_index "jijing_questions", ["jijing_task_id"], name: "index_jijing_questions_on_jijing_task_id", using: :btree
 
+  create_table "jijing_samples", force: true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "jijing_question_id"
+  end
+
+  add_index "jijing_samples", ["jijing_question_id"], name: "index_jijing_samples_on_jijing_question_id", using: :btree
+  add_index "jijing_samples", ["user_id"], name: "index_jijing_samples_on_user_id", using: :btree
+
   create_table "jijing_tasks", force: true do |t|
     t.string   "name"
     t.integer  "jijing_group_id"
@@ -218,6 +229,17 @@ ActiveRecord::Schema.define(version: 20141105060804) do
     t.datetime "updated_at"
     t.string   "analysis"
   end
+
+  create_table "jinghua_samples", force: true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "jinghua_question_id"
+  end
+
+  add_index "jinghua_samples", ["jinghua_question_id"], name: "index_jinghua_samples_on_jinghua_question_id", using: :btree
+  add_index "jinghua_samples", ["user_id"], name: "index_jinghua_samples_on_user_id", using: :btree
 
   create_table "judgements", force: true do |t|
     t.integer  "score"
@@ -346,6 +368,19 @@ ActiveRecord::Schema.define(version: 20141105060804) do
 
   add_index "oral_results", ["user_id"], name: "index_oral_results_on_user_id", using: :btree
 
+  create_table "pcl_answers", force: true do |t|
+    t.integer  "tpo_question_id"
+    t.integer  "user_id"
+    t.integer  "section_number"
+    t.string   "is_correct"
+    t.string   "option"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pcl_answers", ["tpo_question_id"], name: "index_pcl_answers_on_tpo_question_id", using: :btree
+  add_index "pcl_answers", ["user_id"], name: "index_pcl_answers_on_user_id", using: :btree
+
   create_table "profiles", force: true do |t|
     t.string   "avatar"
     t.string   "nickname"
@@ -447,6 +482,19 @@ ActiveRecord::Schema.define(version: 20141105060804) do
 
   add_index "reproduction_samples", ["reproduction_question_id"], name: "index_reproduction_samples_on_reproduction_question_id", using: :btree
 
+  create_table "t_answers", force: true do |t|
+    t.integer  "tpo_question_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.string   "is_shared"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "t_answers", ["tpo_question_id"], name: "index_t_answers_on_tpo_question_id", using: :btree
+  add_index "t_answers", ["user_id"], name: "index_t_answers_on_user_id", using: :btree
+
   create_table "tasks", force: true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -461,6 +509,55 @@ ActiveRecord::Schema.define(version: 20141105060804) do
 
   add_index "tasks", ["question_id"], name: "index_tasks_on_question_id", using: :btree
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
+
+  create_table "tpo_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tpo_questions", force: true do |t|
+    t.text     "content"
+    t.integer  "sequence_number"
+    t.integer  "tpo_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "analysis"
+  end
+
+  add_index "tpo_questions", ["tpo_type_id"], name: "index_tpo_questions_on_tpo_type_id", using: :btree
+
+  create_table "tpo_resolutions", force: true do |t|
+    t.text     "content"
+    t.integer  "tpo_question_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tpo_resolutions", ["tpo_question_id"], name: "index_tpo_resolutions_on_tpo_question_id", using: :btree
+  add_index "tpo_resolutions", ["user_id"], name: "index_tpo_resolutions_on_user_id", using: :btree
+
+  create_table "tpo_samples", force: true do |t|
+    t.string   "standpoint"
+    t.text     "content"
+    t.integer  "tpo_question_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tpo_samples", ["tpo_question_id"], name: "index_tpo_samples_on_tpo_question_id", using: :btree
+  add_index "tpo_samples", ["user_id"], name: "index_tpo_samples_on_user_id", using: :btree
+
+  create_table "tpo_types", force: true do |t|
+    t.string   "name"
+    t.integer  "tpo_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tpo_types", ["tpo_group_id"], name: "index_tpo_types_on_tpo_group_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "origin"
@@ -504,6 +601,39 @@ ActiveRecord::Schema.define(version: 20141105060804) do
 
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
+
+  create_table "w_answers", force: true do |t|
+    t.integer  "tpo_question_id"
+    t.integer  "user_id"
+    t.string   "standpoint"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "w_answers", ["tpo_question_id"], name: "index_w_answers_on_tpo_question_id", using: :btree
+  add_index "w_answers", ["user_id"], name: "index_w_answers_on_user_id", using: :btree
+
+  create_table "work_resolutions", force: true do |t|
+    t.text     "content"
+    t.integer  "jijing_work_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "work_resolutions", ["jijing_work_id"], name: "index_work_resolutions_on_jijing_work_id", using: :btree
+
+  create_table "work_samples", force: true do |t|
+    t.string   "standpoint"
+    t.text     "content"
+    t.integer  "jijing_work_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "work_samples", ["jijing_work_id"], name: "index_work_samples_on_jijing_work_id", using: :btree
+  add_index "work_samples", ["user_id"], name: "index_work_samples_on_user_id", using: :btree
 
   create_table "works", force: true do |t|
     t.string   "standpoint"

@@ -28,6 +28,7 @@ module API
       mount API::V1::JijingAnswers
       mount API::V1::JijingMarks
       mount API::V1::JinghuaMarks
+      mount API::V1::TpoGroups
 
       add_swagger_documentation(
         api_version: "v1",
