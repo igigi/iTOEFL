@@ -5,12 +5,20 @@ module API
 
       resource :articles do
 
-        desc "Create a article."
+        desc "Create a article.", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
         params do
           requires :content, type: String, desc: "work content"
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
+          authenticate!
           Article.create!({
             content: params[:content],
             status: 0,
@@ -18,9 +26,30 @@ module API
           })
         end
 
-        desc "get a article to mark"
-        get "get_one" do
+        desc "get a article to mark", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get "get_one", serializer: CustomArticleSerializer do
+          authenticate!
           Article.grap_one
+        end
+
+        desc "get my article", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get "" do
+          authenticate!
+          current_user.articles
         end
       end
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106085041) do
+ActiveRecord::Schema.define(version: 20141110092714) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20141106085041) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "contact"
   end
 
   add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
@@ -586,6 +587,18 @@ ActiveRecord::Schema.define(version: 20141106085041) do
   end
 
   add_index "vocabulary_questions", ["vocabulary_group_id"], name: "index_vocabulary_questions_on_vocabulary_group_id", using: :btree
+
+  create_table "vocabulary_results", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "vocabulary_question_id"
+    t.integer  "vocabulary_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vocabulary_results", ["user_id"], name: "index_vocabulary_results_on_user_id", using: :btree
+  add_index "vocabulary_results", ["vocabulary_group_id"], name: "index_vocabulary_results_on_vocabulary_group_id", using: :btree
+  add_index "vocabulary_results", ["vocabulary_question_id"], name: "index_vocabulary_results_on_vocabulary_question_id", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

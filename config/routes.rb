@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'assets/index'
 
   namespace :v1, defaults: {format: 'json'} do
+    resources :pcl_answers
+    
     resources :article_marks
     
     resources :opinions

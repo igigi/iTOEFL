@@ -18,6 +18,7 @@ module API
           requires :device, type: String, desc: "user device model"
           requires :system, type: String, desc: "user device system version"
           requires :app_version, type: String, desc: "app version"
+          requires :contact, type: String, desc: " user contact"
         end
         post do
           status 204
@@ -25,7 +26,8 @@ module API
             content: params[:content],
             device: params[:device],
             system: params[:system],
-            version: params[:app_version]
+            version: params[:app_version],
+            contact: params[:contact]
           })
         end
       end

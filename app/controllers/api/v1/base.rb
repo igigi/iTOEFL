@@ -11,6 +11,7 @@ module API
       mount API::V1::GrammarTypes
       mount API::V1::GrammarGroups
       mount API::V1::VocabularyGroups
+      mount API::V1::VocabularyResults
       mount API::V1::Articles
       mount API::V1::ArticleMarks
       mount API::V1::OralGroups
@@ -29,6 +30,8 @@ module API
       mount API::V1::JijingMarks
       mount API::V1::JinghuaMarks
       mount API::V1::TpoGroups
+      mount API::V1::TpoQuestions
+
 
       add_swagger_documentation(
         api_version: "v1",
