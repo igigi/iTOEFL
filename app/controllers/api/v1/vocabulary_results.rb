@@ -6,11 +6,7 @@ module API
       resource :vocabulary_results do
 
         desc "Create a vocabulary result."
-        params do
-          requires :user_id, type: Integer, desc: "id of user"
-          requires :vocabulary_group_id, type: Integer, desc: "ID of group"
-          requires :vocabulary_question_id, type: Integer, desc: "id of question"
-        end
+
         post do
           status 204
           #authenticate!

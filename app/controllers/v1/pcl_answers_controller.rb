@@ -14,6 +14,6 @@ class V1::PclAnswersController < ApplicationController
 
   private
     def pcl_answer_params
-      params.require(:pcl_answer).permit([:user_id, :tpo_question_id, :section_number, :is_correct, :option])
+      params.permit(:user_id, :tpo_question_id, :section_number, :is_correct, :option)
     end
 end

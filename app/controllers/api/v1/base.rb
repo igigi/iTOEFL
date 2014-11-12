@@ -14,10 +14,12 @@ module API
       mount API::V1::VocabularyResults
       mount API::V1::Articles
       mount API::V1::ArticleMarks
+      mount API::V1::ArticleJudgements
       mount API::V1::OralGroups
       mount API::V1::OralResults
       mount API::V1::JinghuaQuestions
       mount API::V1::JinghuaAnswers
+      mount API::V1::JinghuaJudgements
       mount API::V1::Profiles
       mount API::V1::Feedbacks
       mount API::V1::ReproductionQuestions
@@ -28,9 +30,12 @@ module API
       mount API::V1::JijingTasks
       mount API::V1::JijingAnswers
       mount API::V1::JijingMarks
+      mount API::V1::JijingMarks
+      mount API::V1::JijingJudgements
       mount API::V1::JinghuaMarks
       mount API::V1::TpoGroups
       mount API::V1::TpoQuestions
+      mount API::V1::TpoJudgements
 
 
       add_swagger_documentation(

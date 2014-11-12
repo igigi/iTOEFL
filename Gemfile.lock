@@ -73,14 +73,6 @@ GEM
       capybara (>= 1.0, < 3)
       colored
       launchy
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
-    carrierwave-aliyun (0.3.1)
-      carrierwave (>= 0.5.7)
-      rest-client (>= 1.6.7)
     cliver (0.3.2)
     coderay (1.1.0)
     coercible (1.0.0)
@@ -133,6 +125,9 @@ GEM
       grape-swagger (~> 0.7.2)
       railties (>= 3.2.12)
     hashie (3.3.1)
+    hashie_rails (0.0.1)
+      hashie (>= 3.0)
+      rails (~> 4.0)
     hike (1.2.3)
     i18n (0.6.11)
     ice_nine (0.11.0)
@@ -311,14 +306,13 @@ DEPENDENCIES
   capistrano3-puma (~> 0.7.0)
   capybara
   capybara-screenshot
-  carrierwave
-  carrierwave-aliyun
   database_cleaner
   factory_girl_rails
   faker
   grape
   grape-active_model_serializers
   grape-swagger-rails
+  hashie_rails
   jquery-rails
   meta_request
   mysql2 (~> 0.3.16)

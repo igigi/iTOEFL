@@ -52,8 +52,7 @@ gem 'will_paginate', "~>3.0.7"
 #gem 'devise', "~>3.3.0"
 gem 'rest-client', "~>1.7.2"
 
-gem 'carrierwave'
-gem 'carrierwave-aliyun'
+gem "hashie_rails"
 
 group :development do
   gem "better_errors"

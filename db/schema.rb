@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110092714) do
+ActiveRecord::Schema.define(version: 20141111083950) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20141110092714) do
 
   add_index "add_questions", ["mark_id"], name: "index_add_questions_on_mark_id", using: :btree
   add_index "add_questions", ["user_id"], name: "index_add_questions_on_user_id", using: :btree
+
+  create_table "article_judgements", force: true do |t|
+    t.integer  "score"
+    t.integer  "article_mark_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "article_judgements", ["article_mark_id"], name: "index_article_judgements_on_article_mark_id", using: :btree
+  add_index "article_judgements", ["user_id"], name: "index_article_judgements_on_user_id", using: :btree
 
   create_table "article_marks", force: true do |t|
     t.integer  "user_id"
@@ -143,6 +154,17 @@ ActiveRecord::Schema.define(version: 20141110092714) do
     t.datetime "updated_at"
   end
 
+  create_table "jijing_judgements", force: true do |t|
+    t.integer  "score"
+    t.integer  "jijing_mark_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jijing_judgements", ["jijing_mark_id"], name: "index_jijing_judgements_on_jijing_mark_id", using: :btree
+  add_index "jijing_judgements", ["user_id"], name: "index_jijing_judgements_on_user_id", using: :btree
+
   create_table "jijing_marks", force: true do |t|
     t.string   "content"
     t.integer  "jijing_answer_id"
@@ -210,6 +232,17 @@ ActiveRecord::Schema.define(version: 20141110092714) do
 
   add_index "jinghua_answers", ["jinghua_question_id"], name: "index_jinghua_answers_on_jinghua_question_id", using: :btree
   add_index "jinghua_answers", ["user_id"], name: "index_jinghua_answers_on_user_id", using: :btree
+
+  create_table "jinghua_judgements", force: true do |t|
+    t.integer  "score"
+    t.integer  "jinghua_mark_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "jinghua_judgements", ["jinghua_mark_id"], name: "index_jinghua_judgements_on_jinghua_mark_id", using: :btree
+  add_index "jinghua_judgements", ["user_id"], name: "index_jinghua_judgements_on_user_id", using: :btree
 
   create_table "jinghua_marks", force: true do |t|
     t.string   "content"
@@ -391,6 +424,7 @@ ActiveRecord::Schema.define(version: 20141110092714) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role",       default: "0"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -516,6 +550,17 @@ ActiveRecord::Schema.define(version: 20141110092714) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "tpo_judgements", force: true do |t|
+    t.integer  "score"
+    t.integer  "tpo_mark_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tpo_judgements", ["tpo_mark_id"], name: "index_tpo_judgements_on_tpo_mark_id", using: :btree
+  add_index "tpo_judgements", ["user_id"], name: "index_tpo_judgements_on_user_id", using: :btree
 
   create_table "tpo_questions", force: true do |t|
     t.text     "content"
