@@ -36,6 +36,8 @@ module API
       mount API::V1::TpoGroups
       mount API::V1::TpoQuestions
       mount API::V1::TpoJudgements
+      mount API::V1::DictationGroups
+      mount API::V1::DictationQuestions
 
 
       add_swagger_documentation(

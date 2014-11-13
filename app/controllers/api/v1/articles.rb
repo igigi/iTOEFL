@@ -37,8 +37,23 @@ module API
         get "get_one", serializer: CustomArticleSerializer do
           authenticate!
           article = Article.grap_one
-          article.update(status: 1)
+          article.update(status: 3)
           article
+        end
+
+        desc "cancel a article to mark", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        delete ":id" do
+          authenticate!
+          article = Article.find(params[:id])
+          article.update(status: 0)
+          nil
         end
 
         desc "get count of article unmarked", {
@@ -64,20 +79,17 @@ module API
           }
         }
         params do
-          requires :role, type: String, desc: "user role"
           requires :sort, type: String, desc: "sort condition, 0:unmark, 1:marked, 2:unjudgement"
           requires :page, type: String, desc: "page number"
         end
         get "" do
           authenticate!
-          if params[:role] == "2"
-            articles = []
-            current_user.article_marks.order("id desc").each do |article_mark|
-              articles << article_mark.article if article_mark.user == current_user
-            end
-            articles
+          if params[:sort] == "0"
+            current_user.articles.where("status = ? OR status = ?", params[:sort], 3).paginate(page: params[:page], per_page: 10)
+          elsif params[:sort] == "1"
+            current_user.articles.where("status = ? OR status = ?", params[:sort], 2).paginate(page: params[:page], per_page: 10)
           else
-            current_user.articles.where(status: params[:sort]).paginate(page: params[:page], per_page: 10)
+            current_user.articles.where(status: 1).paginate(page: params[:page], per_page: 10)
           end
         end
       end

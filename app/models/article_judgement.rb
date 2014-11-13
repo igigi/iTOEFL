@@ -5,6 +5,6 @@ class ArticleJudgement < ActiveRecord::Base
   after_save :set_status
 
   def set_status
-	  self.article.update(status: 2)
+	  self.article_mark.article.update(status: 2)
   end
 end

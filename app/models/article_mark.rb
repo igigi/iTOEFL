@@ -1,6 +1,7 @@
 class ArticleMark < ActiveRecord::Base
   belongs_to :user
   belongs_to :article
+  has_one :article_judgement
 
   after_save :set_status
 

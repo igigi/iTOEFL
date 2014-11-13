@@ -2,6 +2,11 @@ class ReproductionQuestionSerializer < ActiveModel::Serializer
   attributes :id, :content, :sequence_number, :top_score
 
   def top_score
-  	current_user.reproduction_results.where(reproduction_question: object).first.score
+  	result = current_user.reproduction_results.find_by(reproduction_question_id: object.id)
+  	if result
+  		result.score
+  	else
+  		""
+  	end
   end
 end

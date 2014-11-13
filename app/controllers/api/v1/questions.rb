@@ -5,7 +5,7 @@ module API
 
       resource :questions do
 
-        desc "Return a question"
+        desc "Return a question", hidden: true
         params do
           requires :id, type: String, desc: "ID of the question"
         end
@@ -13,7 +13,7 @@ module API
           Question.where(permitted_params[:id]).first!
         end
 
-        desc "Return 10 works per page"
+        desc "Return 10 works per page", hidden: true
         params do
           requires :id, type: Integer, desc: "ID of question"
           requires :page, type: String, desc: "page number"

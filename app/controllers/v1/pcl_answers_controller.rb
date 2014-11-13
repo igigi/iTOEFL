@@ -1,19 +1,19 @@
 class V1::PclAnswersController < ApplicationController
 
   def create
-    @answer = PclAnswer.new(pcl_answer_params)
+    pcl_answers = []
 
-    respond_to do |format|
-      if @answer.save
-        format.json { head :no_content }
-      else
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
+    pcl_answer_params.each do |p|
+      pcl_answer = PclAnswer.new(p)
+      pcl_answers << pcl_answer if pcl_answer.save
     end
+
+    head :no_content
   end
 
-  private
-    def pcl_answer_params
-      params.permit(:user_id, :tpo_question_id, :section_number, :is_correct, :option)
-    end
+  def pcl_answer_params
+    params.require(:pcl_answers).map do |p|
+       ActionController::Parameters.new(p.to_hash).permit(:tpo_question_id, :user_id, :section_number, :is_correct, :option)
+     end
+  end
 end

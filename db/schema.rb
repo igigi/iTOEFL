@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111083950) do
+ActiveRecord::Schema.define(version: 20141112081212) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -127,6 +127,18 @@ ActiveRecord::Schema.define(version: 20141111083950) do
   end
 
   add_index "grammar_questions", ["grammar_group_id"], name: "index_grammar_questions_on_grammar_group_id", using: :btree
+
+  create_table "grammar_results", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "grammar_question_id"
+    t.integer  "grammar_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "grammar_results", ["grammar_group_id"], name: "index_grammar_results_on_grammar_group_id", using: :btree
+  add_index "grammar_results", ["grammar_question_id"], name: "index_grammar_results_on_grammar_question_id", using: :btree
+  add_index "grammar_results", ["user_id"], name: "index_grammar_results_on_user_id", using: :btree
 
   create_table "grammar_types", force: true do |t|
     t.string   "name"

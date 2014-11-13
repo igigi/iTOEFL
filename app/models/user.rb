@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :feedbacks
 
-  has_many :reproduction_results
+  has_many :reproduction_results, dependent: :destroy
 
   has_many :rb_favorites, dependent: :destroy
   has_many :tasks, dependent: :destroy
@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
 
   before_create :set_auth_token
+  after_save :create_default_profile
 
   acts_as_voter
 
@@ -36,5 +37,9 @@ class User < ActiveRecord::Base
         token = SecureRandom.hex	
         break token unless self.class.exists?(auth_token: token)	
       end	
+    end
+
+    def create_default_profile
+      self.create_profile(avatar: "http://newbbs.b0.upaiyun.com/avater/avater.png", nickname: "xiaoma")
     end
 end

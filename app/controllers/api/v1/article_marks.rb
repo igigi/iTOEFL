@@ -21,6 +21,23 @@ module API
         post do
           ArticleMark.create(params[:article_mark])
         end
+
+        desc "get my article marked for teacher", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        params do
+          requires :sort, type: String, desc: "sort condition, 0:unmark, 1:marked, 2:unjudgement"
+          requires :page, type: String, desc: "page number"
+        end
+        get "", each_serializer: CustomArticleMarkSerializer do
+          authenticate!
+            current_user.article_marks.order("id desc").paginate(page: params[:page], per_page: 10)
+        end
       end
     end
   end
