@@ -5,7 +5,14 @@ module API
 
       resource :vocabulary_groups do
 
-        desc "Return a vocabulary group"
+        desc "Return a vocabulary group", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
 
         get "/group", root: :vocabulary_groups, each_serializer: CustomVocabularyGroupSerializer do
           VocabularyGroup.all

@@ -5,7 +5,14 @@ module API
 
       resource :jinghua_questions do
 
-        desc "Return a jinghua question"
+        desc "Return a jinghua question", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
         params do
           requires :content_type, type: String, desc: "type of the jinghua question"
         end

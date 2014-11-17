@@ -8,11 +8,6 @@ Bundler.require(*Rails.groups)
 
 module MyTOEFL
   class Application < Rails::Application
-
-    config.action_dispatch.default_headers.merge!({
-      'Access-Control-Allow-Origin' => '*',
-      'Access-Control-Request-Method' => '*'
-    })
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -27,10 +22,10 @@ module MyTOEFL
     # config.i18n.default_locale = :de
     require 'rack/cors'
     
-    config.middleware.use Rack::Cors do
+    config.middleware.insert_before "ActionDispatch::Static", "Rack::Cors" do
       allow do
-        origins "*"
-        resource "*", headers: :any, methods: [:get, :post, :put, :delete, :options]
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
   end

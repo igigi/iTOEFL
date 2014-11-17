@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112081212) do
+ActiveRecord::Schema.define(version: 20141116095819) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -82,6 +82,17 @@ ActiveRecord::Schema.define(version: 20141112081212) do
 
   add_index "dictation_questions", ["dictation_group_id"], name: "index_dictation_questions_on_dictation_group_id", using: :btree
 
+  create_table "dictation_results", force: true do |t|
+    t.text     "content"
+    t.integer  "dictation_question_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dictation_results", ["dictation_question_id"], name: "index_dictation_results_on_dictation_question_id", using: :btree
+  add_index "dictation_results", ["user_id"], name: "index_dictation_results_on_user_id", using: :btree
+
   create_table "discussions", force: true do |t|
     t.string   "content"
     t.string   "media_url"
@@ -109,6 +120,16 @@ ActiveRecord::Schema.define(version: 20141112081212) do
 
   add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
 
+  create_table "grammar_footprints", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "grammar_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "grammar_footprints", ["grammar_group_id"], name: "index_grammar_footprints_on_grammar_group_id", using: :btree
+  add_index "grammar_footprints", ["user_id"], name: "index_grammar_footprints_on_user_id", using: :btree
+
   create_table "grammar_groups", force: true do |t|
     t.string   "sequence_number"
     t.datetime "created_at"
@@ -127,6 +148,17 @@ ActiveRecord::Schema.define(version: 20141112081212) do
   end
 
   add_index "grammar_questions", ["grammar_group_id"], name: "index_grammar_questions_on_grammar_group_id", using: :btree
+
+  create_table "grammar_rates", force: true do |t|
+    t.integer  "user_id"
+    t.string   "rate"
+    t.integer  "grammar_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "grammar_rates", ["grammar_group_id"], name: "index_grammar_rates_on_grammar_group_id", using: :btree
+  add_index "grammar_rates", ["user_id"], name: "index_grammar_rates_on_user_id", using: :btree
 
   create_table "grammar_results", force: true do |t|
     t.integer  "user_id"
@@ -627,6 +659,15 @@ ActiveRecord::Schema.define(version: 20141112081212) do
     t.datetime "updated_at"
     t.string   "captcha"
   end
+
+  create_table "vocabulary_footprints", force: true do |t|
+    t.integer  "user_id"
+    t.string   "sequence_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vocabulary_footprints", ["user_id"], name: "index_vocabulary_footprints_on_user_id", using: :btree
 
   create_table "vocabulary_groups", force: true do |t|
     t.string   "sequence_number"

@@ -10,8 +10,11 @@ module API
       mount API::V1::Reports
       mount API::V1::GrammarTypes
       mount API::V1::GrammarGroups
+      mount API::V1::GrammarFootprints
+      mount API::V1::GrammarRates
       mount API::V1::VocabularyGroups
       mount API::V1::VocabularyResults
+      mount API::V1::VocabularyFootprints
       mount API::V1::Articles
       mount API::V1::ArticleMarks
       mount API::V1::ArticleJudgements
@@ -38,6 +41,8 @@ module API
       mount API::V1::TpoJudgements
       mount API::V1::DictationGroups
       mount API::V1::DictationQuestions
+      mount API::V1::DictationResults
+      mount API::V1::DictationFootprints
 
 
       add_swagger_documentation(

@@ -5,25 +5,32 @@ module API
 
       resource :vocabulary_results do
 
-        desc "Create a vocabulary result.", hidden: true
+        desc "get error vocabulary question", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
 
         params do
-          requires :vocabulary_results, type: Array do
-            requires :vocabulary_group_id
-            requires :vocabulary_question_id
-            requires :user_id
-          end
+          requires :vocabulary_group_id, type: Integer, desc: "id"
+        end
+        get "" do
+          VocabularyResult.where("user_id = ? AND vocabulary_group_id = ?", current_user.id, params[:vocabulary_group_id])
         end
 
-        post do
-          status 204
-          #authenticate!
-          content_type "application/json"
-          VocabularyResult.create!({
-            vocabulary_question_id: params[:vocabulary_question_id],
-            vocabulary_group_id: params[:vocabulary_group_id],
-            user_id: params[:user_id]}
-          )
+        desc "delete a vocabulary result"
+        params do
+          requires :vocabulary_result, type: String, desc: "id,ex 1,2,3"
+        end
+
+        delete "" do
+          params[:vocabulary_result].split(",").each do |id|
+            VocabularyResult.find(id).destroy
+          end
+          nil
         end
       end
     end
