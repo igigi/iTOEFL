@@ -1,7 +1,11 @@
 class JinghuaQuestionSerializer < ActiveModel::Serializer
-  attributes :id, :content, :my_history
+  attributes :id, :content, :analysis, :answer_id
 
-  def my_history
-  	current_user.jinghua_answers.where(jinghua_question_id: object.id)
+  def answer_id
+  	if answer = current_user.jinghua_answers.where("jinghua_question_id = ? AND status = ?", object.id, "0").last
+  		answer.id
+  	else
+  		nil
+  	end
   end
 end

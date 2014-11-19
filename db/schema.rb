@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116095819) do
+ActiveRecord::Schema.define(version: 20141119022501) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -120,16 +120,6 @@ ActiveRecord::Schema.define(version: 20141116095819) do
 
   add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
 
-  create_table "grammar_footprints", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "grammar_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "grammar_footprints", ["grammar_group_id"], name: "index_grammar_footprints_on_grammar_group_id", using: :btree
-  add_index "grammar_footprints", ["user_id"], name: "index_grammar_footprints_on_user_id", using: :btree
-
   create_table "grammar_groups", force: true do |t|
     t.string   "sequence_number"
     t.datetime "created_at"
@@ -196,6 +186,7 @@ ActiveRecord::Schema.define(version: 20141116095819) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "group_type"
   end
 
   create_table "jijing_judgements", force: true do |t|
@@ -223,14 +214,13 @@ ActiveRecord::Schema.define(version: 20141116095819) do
 
   create_table "jijing_questions", force: true do |t|
     t.string   "sequence_number"
-    t.integer  "jijing_task_id"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "analysis"
+    t.integer  "jijing_group_id"
+    t.string   "question_type"
   end
-
-  add_index "jijing_questions", ["jijing_task_id"], name: "index_jijing_questions_on_jijing_task_id", using: :btree
 
   create_table "jijing_samples", force: true do |t|
     t.string   "content"
@@ -242,26 +232,6 @@ ActiveRecord::Schema.define(version: 20141116095819) do
 
   add_index "jijing_samples", ["jijing_question_id"], name: "index_jijing_samples_on_jijing_question_id", using: :btree
   add_index "jijing_samples", ["user_id"], name: "index_jijing_samples_on_user_id", using: :btree
-
-  create_table "jijing_tasks", force: true do |t|
-    t.string   "name"
-    t.integer  "jijing_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "jijing_tasks", ["jijing_group_id"], name: "index_jijing_tasks_on_jijing_group_id", using: :btree
-
-  create_table "jijing_works", force: true do |t|
-    t.string   "sequence_number"
-    t.integer  "jijing_group_id"
-    t.text     "content"
-    t.string   "content_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "jijing_works", ["jijing_group_id"], name: "index_jijing_works_on_jijing_group_id", using: :btree
 
   create_table "jinghua_answers", force: true do |t|
     t.integer  "user_id"
@@ -538,6 +508,7 @@ ActiveRecord::Schema.define(version: 20141116095819) do
     t.string   "sequence_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "content_ch"
   end
 
   create_table "reproduction_results", force: true do |t|
@@ -660,15 +631,6 @@ ActiveRecord::Schema.define(version: 20141116095819) do
     t.string   "captcha"
   end
 
-  create_table "vocabulary_footprints", force: true do |t|
-    t.integer  "user_id"
-    t.string   "sequence_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "vocabulary_footprints", ["user_id"], name: "index_vocabulary_footprints_on_user_id", using: :btree
-
   create_table "vocabulary_groups", force: true do |t|
     t.string   "sequence_number"
     t.datetime "created_at"
@@ -685,6 +647,17 @@ ActiveRecord::Schema.define(version: 20141116095819) do
   end
 
   add_index "vocabulary_questions", ["vocabulary_group_id"], name: "index_vocabulary_questions_on_vocabulary_group_id", using: :btree
+
+  create_table "vocabulary_rates", force: true do |t|
+    t.integer  "user_id"
+    t.string   "rate"
+    t.integer  "vocabulary_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vocabulary_rates", ["user_id"], name: "index_vocabulary_rates_on_user_id", using: :btree
+  add_index "vocabulary_rates", ["vocabulary_group_id"], name: "index_vocabulary_rates_on_vocabulary_group_id", using: :btree
 
   create_table "vocabulary_results", force: true do |t|
     t.integer  "user_id"

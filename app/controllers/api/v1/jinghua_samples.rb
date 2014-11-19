@@ -1,11 +1,11 @@
 module API
   module V1
-    class DictationFootprints < Grape::API
+    class JinghuaSamples < Grape::API
       include API::V1::Defaults
 
-      resource :dictation_footprints do
+      resource :jinghua_samples do
 
-        desc "get my dictation footprint.", {
+        desc "get a jinghua samples", {
           headers: {
             "Authorization" => {
               description: "Valdates your identity",
@@ -13,13 +13,13 @@ module API
             }
           }
         }
+        params do
+          requires "jinghua_question_id", type: Integer, desc: "jinghua question id"
+        end
+
         get "" do
           authenticate!
-          if result = DictationResult.where(user_id: current_user.id).last
-            result.dictation_question
-          else
-            nil
-          end
+          JinghuaQuestion.find(params[:jinghua_question_id]).jinghua_samples
         end
       end
     end

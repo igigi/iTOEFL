@@ -1,6 +1,9 @@
 class V1::GrammarResultsController < ApplicationController
 
   def create
+    GrammarResult.where("user_id = ? AND grammar_group_id = ?", params[:user_id], params[:grammar_group_id]).each do |p|
+      p.destroy
+    end
     grammar_results = []
 
     grammar_results_params.each do |p|

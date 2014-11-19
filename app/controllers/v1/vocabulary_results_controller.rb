@@ -1,6 +1,10 @@
 class V1::VocabularyResultsController < ApplicationController
 
   def create
+    VocabularyResult.where("user_id = ? AND vocabulary_group_id = ?", params[:user_id], params[:vocabulary_group_id]).each do |p|
+      p.destroy
+    end
+
     vocabulary_results = []
 
     vocabulary_results_params.each do |p|
