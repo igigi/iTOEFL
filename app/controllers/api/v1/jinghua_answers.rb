@@ -14,23 +14,26 @@ module API
           }
         }
         params do
-          requires :remark, type: String, desc: "jinghua answer remark"
-          requires :is_shared, type: String, desc: "0,1"
+          optional :remark, type: String, desc: "jinghua answer remark"
           requires :content, type: String, desc: "jinghua answer content"
           requires :jinghua_question_id, type: Integer, desc: "jinghua question ID"
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
-          status 204
           authenticate!
-          JinghuaAnswer.create!({
-            remark: params[:remark],
-            content: params[:content],
-            status: 0,
-            is_shared: params[:is_shared],
-            jinghua_question_id: params[:jinghua_question_id],
-            user_id: params[:user_id]
-          })
+          if current_user.jinghua_answers.where("jinghua_question_id = ? AND status = ?", params[:jinghua_question_id], "0").last.nil?
+            JinghuaAnswer.create!({
+              remark: params[:remark],
+              content: params[:content],
+              status: 0,
+              jinghua_question_id: params[:jinghua_question_id],
+              user_id: params[:user_id]
+            })
+            status 204
+          else            
+            status 401
+            {error: "you have unmark answer"}
+          end
         end
 
         desc "get a jinghua answer", {
