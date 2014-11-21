@@ -33,7 +33,6 @@ module API
       mount API::V1::OralOrigins
       mount API::V1::Oral2Results
       mount API::V1::JijingGroups
-      mount API::V1::JijingTasks
       mount API::V1::JijingAnswers
       mount API::V1::JijingMarks
       mount API::V1::JijingMarks

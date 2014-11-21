@@ -1,5 +1,5 @@
 class JijingAnswerSerializer < ActiveModel::Serializer
-  attributes :id, :content, :user
+  attributes :id, :content, :created_at, :user
 
   def user
   	object.user.profile
