@@ -5,9 +5,17 @@ module API
 
       resource :grammar_types do
 
-        desc "Return question type"
+        desc "get my grammar type.", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
 
-        get "" do
+        get "", _from: '_v1_grammar_types' do
+          authenticate!
           GrammarType.all
         end
       end
