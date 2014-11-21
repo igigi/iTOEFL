@@ -15,7 +15,7 @@ module API
         }
         get "",root: "grammar_footprint", serializer: CustomGrammarGroupSerializer do
           authenticate!
-          if result = GrammarRate.where(user_id: current_user.id).order("updated_at").last
+          if result = GrammarResult.where(user_id: current_user.id).order("updated_at").last
             result.grammar_group 
           else
             nil

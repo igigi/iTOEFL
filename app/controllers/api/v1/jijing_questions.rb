@@ -1,11 +1,11 @@
 module API
   module V1
-    class JijingGroups < Grape::API
+    class JijingQuestions < Grape::API
       include API::V1::Defaults
 
-      resource :jijing_groups do
+      resource :jijing_questions do
 
-        desc "Return the newest jijing yuce", {
+        desc "Return the jijing groups question", {
           headers: {
             "Authorization" => {
               description: "Valdates your identity",
@@ -14,28 +14,17 @@ module API
           }
         }
         params do
+          requires :id, type: Integer, desc: "group id"
           requires :question_type, type: String, desc: "1: kouyu or 2: xiezuo"
         end
 
-        get "/yuce", root: "jijing_questions", each_serializer: CustomJijingQuestionSerializer do
-          newest_group = JijingGroup.order("created_at").last
+        get "", each_serializer: CustomJijingQuestionSerializer do
+          newest_group = JijingGroup.find(params[:id])
           if params[:question_type] == "1"
             newest_group.jijing_questions.where(question_type: "1")
           elsif params[:question_type] == "2"
             newest_group.jijing_questions.where(question_type: "2")
           end         
-        end
-
-        desc "Return the newest jijing groups zhenti list", {
-          headers: {
-            "Authorization" => {
-              description: "Valdates your identity",
-              required: true
-            }
-          }
-        }
-        get "/zhenti" do
-          JijingGroup.where(group_type: "2").order("created_at")      
         end
       end
     end

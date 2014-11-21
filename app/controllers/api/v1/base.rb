@@ -11,14 +11,15 @@ module API
       mount API::V1::GrammarTypes
       mount API::V1::GrammarGroups
       mount API::V1::GrammarFootprints
-      #mount API::V1::GrammarRates
+      mount API::V1::GrammarResults
       mount API::V1::VocabularyGroups
       mount API::V1::VocabularyResults
       mount API::V1::VocabularyFootprints
       mount API::V1::VocabularyRates
       mount API::V1::Articles
       mount API::V1::ArticleMarks
-      mount API::V1::ArticleJudgements
+      mount API::V1::Speeches
+      #mount API::V1::ArticleJudgements
       mount API::V1::OralGroups
       mount API::V1::OralResults
       mount API::V1::JinghuaQuestions
@@ -33,6 +34,8 @@ module API
       mount API::V1::OralOrigins
       mount API::V1::Oral2Results
       mount API::V1::JijingGroups
+      mount API::V1::JijingQuestions
+      mount API::V1::JijingSamples
       mount API::V1::JijingAnswers
       mount API::V1::JijingMarks
       mount API::V1::JijingMarks
