@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
+  match '/auth/:provider/callback' => 'login#create', via: [:get, :post]
+
+  resources :login
 
   mount GrapeSwaggerRails::Engine, at: "/doc"
 
   resources :grammar_questions
 
   resources :grammar_groups
-  
+
   resources :live_broadcasts
 
   resources :lb_comments
@@ -22,13 +25,13 @@ Rails.application.routes.draw do
 
   namespace :v1, defaults: {format: 'json'} do
     resources :grammar_results
-    
+
     resources :vocabulary_results
-    
+
     resources :pcl_answers
-    
+
     resources :article_marks
-    
+
     resources :opinions
 
     resources :discussions do
@@ -38,7 +41,7 @@ Rails.application.routes.draw do
     resources :tasks do
       resources :opinions
     end
-      
+
     resources :users do
       post 'login', on: :collection
       post 'verify_open_id', on: :collection
@@ -66,7 +69,7 @@ Rails.application.routes.draw do
   end
 
   mount API::Base, at: "/"
-  
+
 
 
 
