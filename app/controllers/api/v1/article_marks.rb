@@ -22,7 +22,7 @@ module API
           ArticleMark.create(params[:article_mark])
         end
 
-        desc "get my article marked for teacher", {
+        desc "get my article marked for student", {
           headers: {
             "Authorization" => {
               description: "Valdates your identity",
