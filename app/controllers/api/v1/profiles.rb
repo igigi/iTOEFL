@@ -14,11 +14,11 @@ module API
           }
         }
         params do
-          requires :avatar, type: String, desc: "avatar url"
-          requires :nickname, type: String, desc: "nickname"
-          requires :gender, type: String, desc: "male female"
-          requires :grade, type: String, desc: "grade"
-          requires :phone, type: String, desc: "user phone number"
+          optional :avatar, type: String, desc: "avatar url"
+          optional :nickname, type: String, desc: "nickname"
+          optional :gender, type: String, desc: "male female"
+          optional :grade, type: String, desc: "grade"
+          optional :phone, type: String, desc: "user phone number"
         end
         post do
           status 204

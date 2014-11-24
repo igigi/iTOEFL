@@ -4,7 +4,7 @@ class JinghuaMark < ActiveRecord::Base
 
   after_save :set_answer_status
 
-  def set_tast_status
+  def set_answer_status
 	  self.jinghua_answer.update(status: 1)
   end
 end

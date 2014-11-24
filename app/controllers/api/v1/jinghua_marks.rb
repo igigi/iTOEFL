@@ -16,7 +16,7 @@ module API
         params do
           requires :content, type: String, desc: "mark content"
           requires :score, type: Integer, desc: "score of answer"
-          requires :jinghua_question_id, type: Integer, desc: "ID of jinghua question"
+          requires :jinghua_answer_id, type: Integer, desc: "ID of jinghua question"
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
@@ -24,7 +24,7 @@ module API
           JinghuaMark.create!({
             content: params[:content],
             score: params[:score],
-            jinghua_question_id: params[:jinghua_question_id],
+            jinghua_answer_id: params[:jinghua_answer_id],
             user_id: params[:user_id]
           })
         end

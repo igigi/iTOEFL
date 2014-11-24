@@ -4,5 +4,6 @@ class JijingAnswerSerializer < ActiveModel::Serializer
   def user
   	object.user.profile
   end
+  has_many :jijing_marks
   has_one :jijing_question
 end
