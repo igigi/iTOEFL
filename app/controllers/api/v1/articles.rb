@@ -15,6 +15,7 @@ module API
         }
         params do
           requires :content, type: String, desc: "work content"
+          requires :jijing_question_id, type: Integer, desc: "jijing question id"
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
@@ -22,6 +23,7 @@ module API
           Article.create!({
             content: params[:content],
             status: 0,
+            jijing_question_id: params[:jijing_question_id],
             user_id: params[:user_id]
           })
         end

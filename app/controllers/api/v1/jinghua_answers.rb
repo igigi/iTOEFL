@@ -17,6 +17,7 @@ module API
           optional :remark, type: String, desc: "jinghua answer remark"
           requires :content, type: String, desc: "jinghua answer content"
           requires :jinghua_question_id, type: Integer, desc: "jinghua question ID"
+          requires :audio_length, type: Integer, desc: "audio length"
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
@@ -25,6 +26,7 @@ module API
             JinghuaAnswer.create!({
               remark: params[:remark],
               content: params[:content],
+              audio_length: params[:audio_length],
               status: 0,
               jinghua_question_id: params[:jinghua_question_id],
               user_id: params[:user_id]
@@ -44,7 +46,7 @@ module API
             }
           }
         }
-        get ":id" do
+        get ":id",root: "jinghua_answer", serializer: CustomJinghuaAnswerSerializer do
           authenticate!
           JinghuaAnswer.find(params[:id])
         end
