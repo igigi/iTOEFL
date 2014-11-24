@@ -18,7 +18,7 @@ class GrammarTypeSerializer < ActiveModel::Serializer
         question_message = {id: grammar_group.id, sequence_number: grammar_group.sequence_number, grammar_questions: grammar_group.grammar_questions.ids}
         relation = GrammarResult.where(grammar_group_id: grammar_group.id, user_id: current_user.id)
         if relation.exists?
-          grammar_result_ids = relation.where('grammar_question_id IS NOT NULL').ids
+          grammar_result_ids = relation.where('grammar_question_id IS NOT NULL').pluck(:grammar_question_id).uniq
           question_message.merge!(grammar_results: grammar_result_ids)
         end
         hash[:grammar_groups].push(question_message)
