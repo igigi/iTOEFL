@@ -67,6 +67,9 @@ Rails.application.routes.draw do
     resources :marks
     resources :judgements
     resources :add_questions
+    resources :home_page, only: [] do
+      get 'hot_exercises', on: :collection
+    end
   end
 
   mount API::Base, at: "/"
