@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  match '/auth/:provider/callback' => 'login#create', via: [:get, :post]
+  match '/auth/:provider/callback' => 'login#omniauth_call_back', via: :get
 
   resources :login
 
@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       post 'login', on: :collection
       post 'verify_open_id', on: :collection
       post 'verify_captcha', on: :collection
+      get 'omniauth_login', on: :collection, format: 'html'
     end
     resources :questions
 
