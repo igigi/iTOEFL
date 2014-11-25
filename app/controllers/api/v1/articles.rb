@@ -28,6 +28,19 @@ module API
           })
         end
 
+        desc "get a jijing article answer", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get ":id" do
+          authenticate!
+          Article.find(params[:id])
+        end
+
         desc "get a article to mark", {
           headers: {
             "Authorization" => {

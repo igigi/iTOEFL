@@ -36,7 +36,6 @@ module API
           requires :open_id, type: String, desc: "user open id"
         end
         post "/verify_open_id" do
-          authenticate!
           if user = User.find_by(open_id: params[:open_id])
             status 200
             {message: "open_id exist"}
