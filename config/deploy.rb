@@ -9,7 +9,7 @@ set :repo_url, 'git@github.com:igigi/iTOEFL.git'
 
 # Default deploy_to directory is /var/www/my_app
 # set :deploy_to, '/var/www/my_app'
-set :deploy_to, '/home/deploy/app_dev2'
+set :deploy_to, '/home/deploy/app_dev'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -46,6 +46,11 @@ SSHKit.config.command_map[:rake] = "#{fetch(:default_env)[:rvm_bin_path]}/rvm ru
 
 
 namespace :deploy do
+
+  desc "reload the database with seed data"
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
 
   desc 'Restart application'
   task :restart do

@@ -84,10 +84,10 @@ gem "rack-cors", require: "rack/cors"
 
 gem 'acts_as_votable', '~> 0.10.0'
 
-gem "omniauth"
-gem "omniauth-oauth2"
-gem "omniauth-weibo-oauth2"
-gem "omniauth-qq-connect"
-# gem 'omniauth-qq'
+gem "carrierwave"
+gem "carrierwave-upyun"
+
+gem 'upyun', '~> 1.0.1'
+
 
 #gem 'protected_attributes'

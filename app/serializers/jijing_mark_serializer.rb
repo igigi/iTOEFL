@@ -1,9 +1,12 @@
 class JijingMarkSerializer < ActiveModel::Serializer
-  attributes :id, :content, :jijing_answer, :score, :user
+  attributes :id, :content, :score, :audio_length, :created_at, :user
   # has_one :user
 
   def user
-    teacher = object.user
-    teacher.present? ? {id: teacher.id, origin: teacher.origin, open_id: teacher.open_id, auth_token: teacher.auth_token, nickname: object.nickname, password: teacher.password} : nil
+    profile = object.user.profile
+    {
+      id: 1, avatar: object.avatar, nickname: object.nickname, gender: profile.gender, grade: profile.grade, phone: profile.phone,
+      user_id: profile.user_id, created_at: profile.created_at, updated_at: profile.updated_at, role: profile.role
+    }
   end
 end

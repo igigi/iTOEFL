@@ -93,7 +93,7 @@ class V1::RecordedBroadcastsController < ApplicationController
     end
 
     def current_user
-      User.find_by(auth_token: request.headers["token"])
+      User.find_by(auth_token: request.headers["Authorization"])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
