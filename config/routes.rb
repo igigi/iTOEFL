@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
+  match '/auth/:provider/callback' => 'login#omniauth_call_back', via: :get
+
+  resources :login
 
   mount GrapeSwaggerRails::Engine, at: "/doc"
 
   resources :grammar_questions
 
   resources :grammar_groups
-  
+
   resources :live_broadcasts
 
   resources :lb_comments
@@ -22,13 +25,13 @@ Rails.application.routes.draw do
 
   namespace :v1, defaults: {format: 'json'} do
     resources :grammar_results
-    
+
     resources :vocabulary_results
-    
+
     resources :pcl_answers
-    
+
     resources :article_marks
-    
+
     resources :opinions
 
     resources :discussions do
@@ -38,11 +41,12 @@ Rails.application.routes.draw do
     resources :tasks do
       resources :opinions
     end
-      
+
     resources :users do
       post 'login', on: :collection
       post 'verify_open_id', on: :collection
       post 'verify_captcha', on: :collection
+      get 'omniauth_login', on: :collection, format: 'html'
     end
     resources :questions
 
@@ -63,10 +67,13 @@ Rails.application.routes.draw do
     resources :marks
     resources :judgements
     resources :add_questions
+    resources :home_page, only: [] do
+      get 'hot_exercises', on: :collection
+    end
   end
 
   mount API::Base, at: "/"
-  
+
 
 
 
