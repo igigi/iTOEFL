@@ -2,6 +2,12 @@ class V1::ArticleMarksController < ApplicationController
 
   def create
     @mark = ArticleMark.new(article_mark_params)
+    user = User.where(id: params[:article_mark][:user_id]).first
+    if user
+      profile = user.profile
+      @mark.avatar = profile.avatar
+      @mark.nickname = profile.nickname
+    end
 
     respond_to do |format|
       if @mark.save
