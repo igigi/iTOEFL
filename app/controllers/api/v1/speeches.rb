@@ -1,6 +1,7 @@
 module API
   module V1
     class Speeches < Grape::API
+      require 'will_paginate/array'
       include API::V1::Defaults
 
       resource :speeches do
@@ -62,7 +63,7 @@ module API
           {count: count}
         end
 
-        desc "get my article marked for students", {
+        desc "get my jijing speech marked for students", {
           headers: {
             "Authorization" => {
               description: "Valdates your identity",
@@ -77,12 +78,27 @@ module API
         get "" do
           authenticate!
           if params[:sort] == "0"
-            (current_user.jinghua_answers.where("status = ? OR status = ?", params[:sort], 3) + current_user.jijing_answers.where("status = ? OR status = ?", params[:sort], 3))
+            (current_user.jinghua_answers.where("status = ? OR status = ?", params[:sort], 3) + current_user.jijing_answers.where("status = ? OR status = ?", params[:sort], 3)).paginate(:page => params[:page], :per_page => 10)
           elsif params[:sort] == "1"
-            (current_user.jinghua_answers.where("status = ? OR status = ?", params[:sort], 2) + current_user.jijing_answers.where("status = ? OR status = ?", params[:sort], 2))
+            (current_user.jinghua_answers.where("status = ? OR status = ?", params[:sort], 2) + current_user.jijing_answers.where("status = ? OR status = ?", params[:sort], 2)).paginate(:page => params[:page], :per_page => 10)
           else
-            (current_user.jinghua_answers.where(status: 1) + current_user.jijing_answers.where(status: 1))
+            (current_user.jinghua_answers.where(status: 1) + current_user.jijing_answers.where(status: 1)).paginate(:page => params[:page], :per_page => 10)
           end
+        end
+
+        desc "get my jijing speech marked statistics for students", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get "/statistics" do
+          authenticate!
+          unmark_count = (current_user.jinghua_answers.where("status = ? OR status = ?", "0", 3) + current_user.jijing_answers.where("status = ? OR status = ?", "0", 3)).count
+          marked_count = (current_user.jinghua_answers.where("status = ? OR status = ?", "1", 2) + current_user.jijing_answers.where("status = ? OR status = ?", "1", 2)).count
+          { unmark_count: unmark_count, marked_count: marked_count }
         end
       end
     end

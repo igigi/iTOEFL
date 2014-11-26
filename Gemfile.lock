@@ -73,6 +73,14 @@ GEM
       capybara (>= 1.0, < 3)
       colored
       launchy
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+    carrierwave-upyun (0.1.8)
+      carrierwave (>= 0.5.7)
+      rest-client (>= 1.6.7)
     cliver (0.3.2)
     coderay (1.1.0)
     coercible (1.0.0)
@@ -306,6 +314,8 @@ DEPENDENCIES
   capistrano3-puma (~> 0.7.0)
   capybara
   capybara-screenshot
+  carrierwave
+  carrierwave-upyun
   database_cleaner
   factory_girl_rails
   faker

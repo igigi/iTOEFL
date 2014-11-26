@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120024520) do
+ActiveRecord::Schema.define(version: 20141124055754) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 20141120024520) do
     t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "audio_length"
   end
 
   add_index "jijing_marks", ["jijing_answer_id"], name: "index_jijing_marks_on_jijing_answer_id", using: :btree
@@ -270,6 +271,7 @@ ActiveRecord::Schema.define(version: 20141120024520) do
     t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "audio_length"
   end
 
   add_index "jinghua_marks", ["jinghua_answer_id"], name: "index_jinghua_marks_on_jinghua_answer_id", using: :btree

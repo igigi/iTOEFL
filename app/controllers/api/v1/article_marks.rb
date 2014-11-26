@@ -22,7 +22,7 @@ module API
           ArticleMark.create(params[:article_mark])
         end
 
-        desc "get my article marked for student", {
+        desc "get my article marked for teacher", {
           headers: {
             "Authorization" => {
               description: "Valdates your identity",
@@ -31,7 +31,6 @@ module API
           }
         }
         params do
-          requires :sort, type: String, desc: "sort condition, 0:unmark, 1:marked, 2:unjudgement"
           requires :page, type: String, desc: "page number"
         end
         get "", each_serializer: CustomArticleMarkSerializer do

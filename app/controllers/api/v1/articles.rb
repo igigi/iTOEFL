@@ -28,6 +28,40 @@ module API
           })
         end
 
+   
+
+        desc "get a article to mark", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get "get_one", root: "article", serializer: CustomArticleSerializer do
+          authenticate!
+          if article = Article.grap_one
+            article.update(status: 3)
+            article
+          else
+            nil
+          end
+        end
+
+        desc "get count of article unmarked", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get "count" do
+          authenticate!
+          count = Article.where(status: 0).count
+          {count: count}
+        end
+
         desc "get a jijing article answer", {
           headers: {
             "Authorization" => {
@@ -39,21 +73,6 @@ module API
         get ":id" do
           authenticate!
           Article.find(params[:id])
-        end
-
-        desc "get a article to mark", {
-          headers: {
-            "Authorization" => {
-              description: "Valdates your identity",
-              required: true
-            }
-          }
-        }
-        get "get_one", serializer: CustomArticleSerializer do
-          authenticate!
-          article = Article.grap_one
-          article.update(status: 3)
-          article
         end
 
         desc "cancel a article to mark", {
@@ -71,21 +90,9 @@ module API
           nil
         end
 
-        desc "get count of article unmarked", {
-          headers: {
-            "Authorization" => {
-              description: "Valdates your identity",
-              required: true
-            }
-          }
-        }
-        get "count" do
-          authenticate!
-          count = Article.where(status: 0).count
-          {count: count}
-        end
+        
 
-        desc "get my article marked for teacher", {
+        desc "get my article marked for students", {
           headers: {
             "Authorization" => {
               description: "Valdates your identity",
@@ -106,6 +113,21 @@ module API
           else
             current_user.articles.where(status: 1).paginate(page: params[:page], per_page: 10)
           end
+        end
+
+
+        desc "get my article marked statistics for students", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get "/statistics" do
+          unmark_count = current_user.articles.where("status = ? OR status = ?", "0", 3).count
+          marked_count = current_user.articles.where("status = ? OR status = ?", "1", 2).count
+          { unmark_count: unmark_count, marked_count: marked_count }
         end
       end
     end

@@ -1,7 +1,6 @@
 class CustomArticleMarkSerializer < ActiveModel::Serializer
-  attributes :id, :score, :created_at, :article, :user
+  attributes :id, :score, :created_at, :article, :user, :jijing_question
   has_many :mark_tips
-  has_one :article_judgement
 
   def article
   	{content: "#{object.article.content}"}
@@ -9,5 +8,9 @@ class CustomArticleMarkSerializer < ActiveModel::Serializer
 
   def user
   	object.article.user.profile
+  end
+
+  def jijing_question
+  	{ content: object.article.jijing_question.content, title: object.article.jijing_question.jijing_group.name }
   end
 end
