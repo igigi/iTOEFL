@@ -21,11 +21,19 @@ module API
         end
         post do
           authenticate!
+          user = User.where(id: params[:user_id]).first
+          if user
+            profile = user.profile
+            avatar = profile.avatar
+            nickname = profile.nickname
+          end
           JijingMark.create!({
             content: params[:content],
             score: params[:score],
             jijing_question_id: params[:jijing_question_id],
-            user_id: params[:user_id]
+            user_id: params[:user_id],
+            avatar: avatar,
+            nickname: nickname
           })
         end
       end
