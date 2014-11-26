@@ -1,7 +1,6 @@
 module API
   module V2
     class Profiles < Grape::API
-      require 'upyun'
       include API::V2::Defaults
 
       resource :profiles do

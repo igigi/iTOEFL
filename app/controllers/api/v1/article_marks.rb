@@ -33,7 +33,7 @@ module API
         params do
           requires :page, type: String, desc: "page number"
         end
-        get "", each_serializer: CustomArticleMarkSerializer do
+        get "", root: "article_marks", each_serializer: CustomArticleMarkSerializer do
           authenticate!
             current_user.article_marks.order("id desc").paginate(page: params[:page], per_page: 10)
         end

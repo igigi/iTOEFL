@@ -86,3 +86,6 @@ gem 'acts_as_votable', '~> 0.10.0'
 
 gem "carrierwave"
 gem "carrierwave-upyun"
+gem 'mini_magick','3.7.0', require: false
+
+gem 'carrierwave-aliyun'
