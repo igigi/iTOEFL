@@ -1,7 +1,8 @@
 module API
-  module V1
+  module V2
     class Profiles < Grape::API
-      include API::V1::Defaults
+      require 'upyun'
+      include API::V2::Defaults
 
       resource :profiles do
 
@@ -23,8 +24,10 @@ module API
         post do
           status 204
           authenticate!
+          upyun = Upyun::Form.new('ov43Ob8LlB1hXXnqai2gxuEx9SQ=', 'newbbs', '60')
+          response_json = upyun.upload(params[:avatar])
           current_user.create_profile!({
-            avatar: params[:avatar],
+            avatar: response_json,
             nickname: params[:nickname],
             gender: params[:gender],
             grade: params[:grade],

@@ -1,9 +1,9 @@
 require "grape-swagger"
 
 module API
-  module V1
+  module V2
     class Base < Grape::API
-      mount API::V1::Profiles
+      mount API::V2::Profiles
 
       add_swagger_documentation(
         api_version: "v2",

@@ -43,7 +43,7 @@ module API
         params do
           requires :page, type: String, desc: "page number"
         end
-        get "" do
+        get "", root: "speeches" do
           authenticate!
           jijing_answer = []
           current_user.jijing_marks.each do |item|
