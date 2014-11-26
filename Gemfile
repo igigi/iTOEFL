@@ -86,6 +86,3 @@ gem 'acts_as_votable', '~> 0.10.0'
 
 gem "carrierwave"
 gem "carrierwave-upyun"
-
-
-#gem 'protected_attributes'

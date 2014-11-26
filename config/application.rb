@@ -22,7 +22,8 @@ module MyTOEFL
     # config.i18n.default_locale = :de
     require 'rack/cors'
     
-    config.middleware.insert_before "ActionDispatch::Static", "Rack::Cors" do
+    #config.middleware.insert_before "ActionDispatch::Static", "Rack::Cors" do
+    config.middleware.insert_before "Rack::Lock", "Rack::Cors" do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]

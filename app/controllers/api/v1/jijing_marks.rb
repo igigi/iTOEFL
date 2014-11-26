@@ -43,7 +43,7 @@ module API
         params do
           requires :page, type: String, desc: "page number"
         end
-        get "" do
+        get "", root: "speeches" do
           authenticate!
           jijing_answer = []
           current_user.jijing_marks.each do |item|
@@ -54,7 +54,7 @@ module API
           current_user.jinghua_marks.each do |item|
             jinghua_answer << item.jinghua_answer
           end
-          (jijing_answer + jinghua_answer).paginate(:page => params[:page], :per_page => 10)
+          (jijing_answer + jinghua_answer).sort_by{ |m| m.created_at }.paginate(:page => params[:page], :per_page => 10)
         end
 
         desc "get my article marked statistics for students", {
