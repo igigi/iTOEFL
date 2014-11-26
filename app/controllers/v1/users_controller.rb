@@ -47,15 +47,6 @@ class V1::UsersController < ApplicationController
     end
   end
 
-  def omniauth_login
-    if params[:origin] == 'qq' || params[:origin] == 'weibo'
-      origin = params[:origin] == 'qq' ? 'qq_connect' : 'weibo'
-      redirect_to "#{root_url}auth/#{origin}"
-    else
-      head 404
-    end
-  end
-
   # GET /users
   # GET /users.json
   def index
