@@ -14,7 +14,7 @@ module API
           }
         }
         params do
-          requires :remark, type: String, desc: "jijing answer remark"
+          optional :remark, type: String, desc: "jijing answer remark"
           requires :content, type: String, desc: "jijing answer content"
           requires :audio_length, type: String, desc: "audio length"
           requires :jijing_question_id, type: Integer, desc: "jijing question ID"
