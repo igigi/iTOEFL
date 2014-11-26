@@ -1,5 +1,5 @@
 class CustomJijingQuestionSerializer < ActiveModel::Serializer
-  attributes :id, :sequence_number, :content, :title, :answer_id
+  attributes :id, :sequence_number, :content, :analysis, :title, :answer_id
 
   def title
   	object.jijing_group.name

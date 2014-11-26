@@ -24,10 +24,8 @@ module API
         post do
           status 204
           authenticate!
-          upyun = Upyun::Form.new('ov43Ob8LlB1hXXnqai2gxuEx9SQ=', 'newbbs', '60')
-          response_json = upyun.upload(params[:avatar])
           current_user.create_profile!({
-            avatar: response_json,
+            avatar: params[:avatar],
             nickname: params[:nickname],
             gender: params[:gender],
             grade: params[:grade],
