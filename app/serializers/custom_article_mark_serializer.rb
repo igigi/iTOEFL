@@ -7,7 +7,12 @@ class CustomArticleMarkSerializer < ActiveModel::Serializer
   end
 
   def user
-  	object.article.user.profile
+  	# object.article.user.profile
+    profile = object.article.user.profile
+    {
+      id: 1, avatar: object.avatar, nickname: object.nickname, gender: profile.gender, grade: profile.grade, phone: profile.phone,
+      user_id: profile.user_id, created_at: profile.created_at, updated_at: profile.updated_at, role: profile.role
+    }
   end
 
   def jijing_question
