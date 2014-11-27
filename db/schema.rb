@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124055754) do
+ActiveRecord::Schema.define(version: 20141127020155) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 20141124055754) do
   end
 
   create_table "jijing_samples", force: true do |t|
-    t.string   "content"
+    t.text     "content"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -354,6 +354,20 @@ ActiveRecord::Schema.define(version: 20141124055754) do
 
   add_index "marks", ["task_id"], name: "index_marks_on_task_id", using: :btree
   add_index "marks", ["user_id"], name: "index_marks_on_user_id", using: :btree
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "content_id"
+    t.integer  "content_type"
+    t.string   "content"
+    t.boolean  "is_pushed",    default: false
+    t.boolean  "is_readed"
+    t.integer  "push_count",   default: 0
+    t.datetime "push_at"
+    t.datetime "read_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "opinions", force: true do |t|
     t.string   "content"

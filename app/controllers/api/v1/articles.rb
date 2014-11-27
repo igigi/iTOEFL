@@ -70,6 +70,21 @@ module API
             }
           }
         }
+
+        desc "get my article marked statistics for students", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
+        get "/statistics" do
+          unmark_count = current_user.articles.where("status = ? OR status = ?", "0", 3).count
+          marked_count = current_user.articles.where("status = ? OR status = ?", "1", 2).count
+          { unmark_count: unmark_count, marked_count: marked_count }
+        end
+
         get ":id" do
           authenticate!
           Article.find(params[:id])
@@ -113,21 +128,6 @@ module API
           else
             current_user.articles.where(status: 1).paginate(page: params[:page], per_page: 10)
           end
-        end
-
-
-        desc "get my article marked statistics for students", {
-          headers: {
-            "Authorization" => {
-              description: "Valdates your identity",
-              required: true
-            }
-          }
-        }
-        get "/statistics" do
-          unmark_count = current_user.articles.where("status = ? OR status = ?", "0", 3).count
-          marked_count = current_user.articles.where("status = ? OR status = ?", "1", 2).count
-          { unmark_count: unmark_count, marked_count: marked_count }
         end
       end
     end
