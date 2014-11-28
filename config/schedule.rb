@@ -19,6 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minute do
-  runner 'HardWorker.perform_async('bob')'
+every 2.minutes do
+  runner "HardWorker.perform_async('bob')"
+  runner "puts 'success'"
 end
