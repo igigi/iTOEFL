@@ -48,6 +48,7 @@ module API
       mount API::V1::DictationQuestions
       mount API::V1::DictationResults
       mount API::V1::DictationFootprints
+      mount API::V1::Messages
 
 
       add_swagger_documentation(
