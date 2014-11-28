@@ -29,5 +29,7 @@ module MyTOEFL
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
+
+    config.eager_load_paths += ["#{config.root}/workers"]
   end
 end
