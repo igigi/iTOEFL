@@ -93,3 +93,5 @@ gem 'carrierwave-aliyun'
 gem 'activesupport-json_encoder', github: 'rails/activesupport-json_encoder'
 
 gem 'sidekiq'
+
+gem 'sinatra', '>= 1.3.0', :require => nil

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   resources :login
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   mount GrapeSwaggerRails::Engine, at: "/doc"
 
   resources :grammar_questions
