@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
 
-  #mount_uploader :avatar, AvatarUploader
 
   validates :open_id, uniqueness: true
 
