@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127020155) do
+ActiveRecord::Schema.define(version: 20141128034427) do
 
   create_table "add_questions", force: true do |t|
     t.string   "content"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20141127020155) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mark_type"
+    t.string   "avatar"
+    t.string   "nickname"
   end
 
   add_index "article_marks", ["article_id"], name: "index_article_marks_on_article_id", using: :btree
@@ -171,6 +173,14 @@ ActiveRecord::Schema.define(version: 20141127020155) do
     t.datetime "updated_at"
   end
 
+  create_table "hot_exercises", force: true do |t|
+    t.integer  "hot_type_id"
+    t.integer  "hot_type"
+    t.integer  "counter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "jijing_answers", force: true do |t|
     t.integer  "jijing_question_id"
     t.integer  "user_id"
@@ -212,6 +222,8 @@ ActiveRecord::Schema.define(version: 20141127020155) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "audio_length"
+    t.string   "avatar"
+    t.string   "nickname"
   end
 
   add_index "jijing_marks", ["jijing_answer_id"], name: "index_jijing_marks_on_jijing_answer_id", using: :btree
@@ -272,6 +284,8 @@ ActiveRecord::Schema.define(version: 20141127020155) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "audio_length"
+    t.string   "avatar"
+    t.string   "nickname"
   end
 
   add_index "jinghua_marks", ["jinghua_answer_id"], name: "index_jinghua_marks_on_jinghua_answer_id", using: :btree
