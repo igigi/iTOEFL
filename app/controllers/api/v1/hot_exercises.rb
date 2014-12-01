@@ -10,7 +10,7 @@ module API
         desc "Return hot exercises."
 
         get "" do
-          HotExercises.all
+          HotExercise.hot_exercises
         end
       end
     end

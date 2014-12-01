@@ -21,5 +21,6 @@ class HotExerciseSerializer < ActiveModel::Serializer
         exercises[exercise_class_sym][:hot_exercises].push(question_message)
       end
     end
+    exercises
   end
 end

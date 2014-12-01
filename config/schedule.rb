@@ -23,3 +23,7 @@ every 2.minutes do
   runner "HardWorker.perform_async('bob')"
   runner "puts 'success'"
 end
+
+every 1.minutes do
+  runner "HotExerciseWorker.perform_async"
+end
