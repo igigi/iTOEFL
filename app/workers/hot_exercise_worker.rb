@@ -46,7 +46,7 @@ class HotExerciseWorker
     end
 
     # 写作
-    articles = Article.select('jijing_question_id, count(jijing_question_id) as question_count').group(:jijing_question_id).order('question_count desc').limit(10)
+    articles = Article.select('jijing_question_id, count(jijing_question_id) as question_count').group(:jijing_question_id).order('question_count desc').limit(5)
     hot_article_ids = HotExercise.where(hot_type: 4).order(counter: :desc).ids
     hot_article_count = hot_article_ids.size
     articles.each_with_index do |hot_article, idx|
@@ -59,7 +59,7 @@ class HotExerciseWorker
     end
 
     # 记忆复写
-    reproduction_results = ReproductionResult.select('reproduction_question_id, count(reproduction_question_id) as question_count').group(:reproduction_question_id).order('question_count desc').limit(10)
+    reproduction_results = ReproductionResult.select('reproduction_question_id, count(reproduction_question_id) as question_count').group(:reproduction_question_id).order('question_count desc').limit(5)
     hot_reproduction_ids = HotExercise.where(hot_type: 5).order(counter: :desc).ids
     hot_reproduction_count = hot_reproduction_ids.size
     reproduction_results.each_with_index do |hot_reproduction, idx|
