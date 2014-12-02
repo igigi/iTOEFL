@@ -18,6 +18,7 @@ module API
         end
 
         get "/yuce", root: "jijing_questions", each_serializer: CustomJijingQuestionSerializer do
+          authenticate!
           newest_group = JijingGroup.where(group_type: "1").order("created_at").last
           if params[:question_type] == "1"
             newest_group.jijing_questions.where(question_type: "1")
@@ -35,6 +36,7 @@ module API
           }
         }
         get "/zhenti" do
+          authenticate!
           JijingGroup.where(group_type: "2").order("created_at")      
         end
       end
