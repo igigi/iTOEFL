@@ -3,7 +3,7 @@ class UserSms
   def self.captcha_sms(user) 
     # Set the request parameters
     timestamp = Time.now.strftime "%Y%m%d%H%M%S"
-    host = 'https://sandboxapp.cloopen.com:8883'
+    host = 'https://app.cloopen.com:8883'
     auth = Base64.strict_encode64("aaf98f89486445e6014881872f2309c3" + ":" + "#{timestamp}")
     sig = Digest::MD5.hexdigest("aaf98f89486445e6014881872f2309c3" + "0669ff0ab2df44e4aa40182aed1e34b0" + "#{timestamp}")
     
