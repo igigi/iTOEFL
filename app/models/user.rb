@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   validates :open_id, uniqueness: true
 
+  has_many :users, dependent: :destroy
+
   has_many :jijing_marks, dependent: :destroy
   has_many :jinghua_marks, dependent: :destroy
 

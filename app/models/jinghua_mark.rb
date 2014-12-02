@@ -17,8 +17,8 @@ class JinghuaMark < ActiveRecord::Base
   end
 
   def set_message
-    jinghua_question_id = jinghua_answer.jinghua_question.id
+    jinghua_answer_id = jinghua_answer.id
     content = "您#{formatted_time(jinghua_answer.created_at)}提交的作业已被批改"
-    Message.create(user_id: user.id, content_id: jinghua_question_id, content_type: 1, content: content)
+    Message.create(user_id: user.id, content_id: jinghua_answer_id, content_type: 1, content: content)
   end
 end
