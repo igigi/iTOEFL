@@ -49,6 +49,7 @@ module API
       mount API::V1::DictationResults
       mount API::V1::DictationFootprints
       mount API::V1::Messages
+      mount API::V1::HotExercises
 
 
       add_swagger_documentation(

@@ -15,10 +15,13 @@ module API
         }
         params do
           requires :page, type: String, desc: "page number"
+          optional :from, type: String, desc: "filter condition, web requires; pc:pc"
         end
         get "" do
           authenticate!
-          Message.where(user_id: current_user.id, is_readed: [false, true]).order(is_readed: :asc, created_at: :desc).paginate(page: params[:page], per_page: 20)
+          is_readed = [false, true]
+          is_readed.push(nil) if params[:from] == 'pc'
+          Message.where(user_id: current_user.id, is_readed: is_readed).order(is_readed: :asc, created_at: :desc).paginate(page: params[:page], per_page: 20)
         end
 
         # 读取未读消息
@@ -30,12 +33,13 @@ module API
             }
           }
         }
-        params do
-          requires :page, type: String, desc: "page number"
-        end
+        # params do
+        #   requires :page, type: String, desc: "page number"
+        # end
         get "unread" do
           authenticate!
-          Message.where(user_id: current_user.id, is_readed: false).order(created_at: :desc).paginate(page: params[:page], per_page: 20)
+          unread = Message.where(user_id: current_user.id, is_readed: [false, nil]).count
+          {unread: unread}
         end
 
         # 回写已读状态

@@ -7,3 +7,8 @@ scheduler.every '30s'  do
         PushWorker.perform_async(item.id) if !item.is_pushed && item.push_count < 3
     end
 end
+
+scheduler.cron '00 03 * * *' do
+  # every day at 3h00
+  HotExerciseWorker.perform_async
+end
