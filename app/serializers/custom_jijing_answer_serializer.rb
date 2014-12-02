@@ -5,4 +5,5 @@ class CustomJijingAnswerSerializer < ActiveModel::Serializer
   	object.user.profile
   end
   has_one :jijing_question
+  has_many :jijing_marks
 end

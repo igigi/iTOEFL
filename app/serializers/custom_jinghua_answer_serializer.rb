@@ -5,4 +5,5 @@ class CustomJinghuaAnswerSerializer < ActiveModel::Serializer
   	object.user.profile
   end
   has_one :jinghua_question
+  has_many :jinghua_marks
 end
