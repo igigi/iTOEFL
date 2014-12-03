@@ -6,7 +6,7 @@ class Push
     user = message.user
     host = 'http://msg.umeng.com/api/send'
     appkey = "532fea8456240b89e201da87"
-    timestamp = Time.now.to_i
+    timestamp = TTime.now.to_i
     validation_token = Digest::MD5.hexdigest("532fea8456240b89e201da87" + "kvxuokzzowpdexsy3d04wl3d6jdicrbl" + "#{timestamp}")
     
     request_body_map = {

@@ -16,7 +16,7 @@ class Push
       timestamp: "#{timestamp}",
       validation_token: "#{validation_token}",
       type: "customizedcast",
-      alias: "ddf",
+      alias: "#{user.open_id}",
       alias_type: "tuofu",
       payload: {
         display_type: "notification",
@@ -34,15 +34,16 @@ class Push
     }
     message.push_count += 1
     message.is_readed = false 
-    Net::HTTP.start(url.host, url.port) do |http|
-      req = Net::HTTP::Post.new(url.path)
-      req.set_form_data(request_body_map)
-      puts http.request(req).body
-      puts http.request(req).code
-      if http.request(req).code == "200"
-        message.is_pushed = true
-        message.save
-      end
+
+    json_headers = {"Content-Type" => "application/json",
+                "Accept" => "application/json"}
+    http = Net::HTTP.new(url.host, url.port)
+
+    response = http.post(url.path, request_body_map.to_json, json_headers)
+    puts response.code
+    if response.code == "200"
+      message.is_pushed = true
+      message.save
     end
   end
 end
