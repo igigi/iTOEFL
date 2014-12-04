@@ -5,7 +5,7 @@ class HotExercise < ActiveRecord::Base
   def self.hot_exercises
     exercises = {vocabulary_groups: {name: '词汇', hot_exercises: []}, grammar_groups: {name: '语法', hot_exercises: []},
                  dictation_groups: {name: '听写', hot_exercises: []}, writing_questions: {name: '写作批改', hot_exercises: []},
-                 reproduction_questions: {name: '记忆复写', hot_exercises: []}}
+                 reproduction_questions: {name: '记忆复写', hot_exercises: []}, forecast_writings: {name: '写作机经', hot_exercises: []}}
     # 词汇 语法 听写
     exercise_types = {1 => 'vocabulary_groups', 2 => 'grammar_groups', 3 => 'dictation_groups', 4 => 'writing_questions', 5 => 'reproduction_questions'}
     exercise_types.each do |idx, exercise_type|
@@ -20,6 +20,11 @@ class HotExercise < ActiveRecord::Base
         question_message.merge!(content_ch: exercise.content_ch) if idx == 5
         exercises[exercise_class_sym][:hot_exercises].push(question_message)
       end
+    end
+    forecast_writings = JijingQuestion.joins(:jijing_group).where(jijing_groups: {group_type: 1}, question_type: 2).order(created_at: :desc).limit(5)
+    forecast_writings.each do |writing|
+      question_message = {id: writing.id, content: writing.content}
+      exercises[:forecast_writings][:hot_exercises].push(question_message)
     end
     exercises
   end
