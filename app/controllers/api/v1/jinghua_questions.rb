@@ -16,8 +16,11 @@ module API
         params do
           requires :content_type, type: String, desc: "type of the jinghua question"
         end
-        get "", root: "jinghua_questions", each_serializer: CustomJinghuaQuestionSerializer do
-          JinghuaQuestion.where(content_type: params[:content_type])
+        # get "", root: "jinghua_questions", each_serializer: CustomJinghuaQuestionSerializer do
+        #   JinghuaQuestion.where(content_type: params[:content_type])
+        # end
+        get "", root: "jinghua_questions" do
+          JinghuaQuestion.type_messages(params[:content_type], current_user.id)
         end
       end
     end

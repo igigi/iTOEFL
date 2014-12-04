@@ -18,13 +18,15 @@ module API
           requires :question_type, type: String, desc: "1: kouyu or 2: xiezuo"
         end
 
-        get "", each_serializer: CustomJijingQuestionSerializer do
+        # get "", each_serializer: CustomJijingQuestionSerializer do
+        get "" do
           newest_group = JijingGroup.find(params[:id])
-          if params[:question_type] == "1"
-            newest_group.jijing_questions.where(question_type: "1")
-          elsif params[:question_type] == "2"
-            newest_group.jijing_questions.where(question_type: "2")
-          end         
+          # if params[:question_type] == "1"
+          #   newest_group.jijing_questions.where(question_type: "1")
+          # elsif params[:question_type] == "2"
+          #   newest_group.jijing_questions.where(question_type: "2")
+          # end
+          newest_group.belong_questions(params[:question_type], current_user.id)
         end
       end
     end

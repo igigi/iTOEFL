@@ -3,6 +3,7 @@ class ArticleSerializer < ActiveModel::Serializer
   has_many :article_marks
 
   def jijing_question
-  	{ content: object.jijing_question.content, title: object.jijing_question.jijing_group.name }
+    jijing_question = object.jijing_question
+  	{ id: jijing_question.id, content: jijing_question.content, title: jijing_question.jijing_group.name }
   end
 end

@@ -17,14 +17,16 @@ module API
           requires :question_type, type: String, desc: "1: kouyu or 2: xiezuo"
         end
 
-        get "/yuce", root: "jijing_questions", each_serializer: CustomJijingQuestionSerializer do
+        # get "/yuce", root: "jijing_questions", each_serializer: CustomJijingQuestionSerializer do
+        get "/yuce", root: "jijing_questions" do
           authenticate!
           newest_group = JijingGroup.where(group_type: "1").order("created_at").last
-          if params[:question_type] == "1"
-            newest_group.jijing_questions.where(question_type: "1")
-          elsif params[:question_type] == "2"
-            newest_group.jijing_questions.where(question_type: "2")
-          end         
+          # if params[:question_type] == "1"
+          #   newest_group.jijing_questions.where(question_type: "1")
+          # elsif params[:question_type] == "2"
+          #   newest_group.jijing_questions.where(question_type: "2")
+          # end
+          newest_group.belong_questions(params[:question_type], current_user.id)
         end
 
         desc "Return the newest jijing groups zhenti list", {
@@ -37,7 +39,7 @@ module API
         }
         get "/zhenti" do
           authenticate!
-          JijingGroup.where(group_type: "2").order("created_at")      
+          JijingGroup.where(group_type: "2").order("created_at")
         end
       end
     end
