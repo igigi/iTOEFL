@@ -56,7 +56,7 @@ module API
         end
         post ":id/set_message_as_read" do
           authenticate!
-          message = Message.where(user_id: current_user.id, id: params[:id]).where.not(is_readed: true).first
+          message = Message.where(user_id: current_user.id, id: params[:id]).where(is_readed: [false, nil]).first
           if message
             message.update(is_readed: true)
             status 204
