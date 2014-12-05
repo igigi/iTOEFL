@@ -25,7 +25,7 @@ module API
           user = User.where(id: params[:user_id]).first
           if user
             profile = user.profile
-            avatar = profile.avatar
+            avatar = profile.avatar.url
             nickname = profile.nickname
           end
           JinghuaMark.create!({

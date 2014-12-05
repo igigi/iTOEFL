@@ -20,15 +20,21 @@ module API
         end
         post do
           authenticate!
-          Article.create!({
-            content: params[:content],
-            status: 0,
-            jijing_question_id: params[:jijing_question_id],
-            user_id: params[:user_id]
-          })
+          if current_user.articles.where(jijing_question_id: params[:jijing_question_id]).last.nil?
+            Article.create!({
+              content: params[:content],
+              status: 0,
+              jijing_question_id: params[:jijing_question_id],
+              user_id: params[:user_id]
+            })
+            status 204
+          else
+            status 205
+            {error: "you've done this question"}
+          end
         end
 
-   
+
 
         desc "get a article to mark", {
           headers: {
@@ -105,7 +111,7 @@ module API
           nil
         end
 
-        
+
 
         desc "get my article marked for students", {
           headers: {

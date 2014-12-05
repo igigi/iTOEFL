@@ -22,7 +22,7 @@ module API
         end
         post do
           authenticate!
-          if current_user.jinghua_answers.where("jinghua_question_id = ? AND status = ?", params[:jinghua_question_id], "0").last.nil?
+          if current_user.jinghua_answers.where(jinghua_question_id: params[:jinghua_question_id]).last.nil?
             JinghuaAnswer.create!({
               remark: params[:remark],
               content: params[:content],
@@ -32,9 +32,9 @@ module API
               user_id: params[:user_id]
             })
             status 204
-          else            
-            status 401
-            {error: "you have unmark answer"}
+          else
+            status 205
+            {error: "you've done this question"}
           end
         end
 

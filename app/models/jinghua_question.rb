@@ -17,13 +17,13 @@ class JinghuaQuestion < ActiveRecord::Base
       # type = 0 未做, type =1 未批, type=2 已批
       type = 0
       if answer
+        answer_id = answer.id
         status = answer.status
-        type = 1 if status == '0'
+        type = 1 if ['0', '3'].include?(status)
         if status == '1'
-          type = 2 if status == '1'
+          type = 2
           score = answer.jinghua_marks.last.score
         end
-        answer_id = answer.id if ['0', '3'].include?(status)
       end
       question_message = {id: question.id, content: question.content, analysis: question.analysis, answer_id: answer_id, score: score, type: type}
       questions[:jinghua_questions].push(question_message)

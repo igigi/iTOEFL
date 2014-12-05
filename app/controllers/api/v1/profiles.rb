@@ -23,7 +23,7 @@ module API
         post do
           status 204
           authenticate!
-          current_user.create_profile!({
+          current_user.profile.update({
             avatar: params[:avatar],
             nickname: params[:nickname],
             gender: params[:gender],
