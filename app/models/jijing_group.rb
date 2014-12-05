@@ -22,9 +22,9 @@ class JijingGroup < ActiveRecord::Base
       if answer
         answer_id = answer.id
         status = answer.status
-        type = 1 if status == '0'
+        type = 1 if status == '3'
         if status == '1'
-          type = 2 if status == '1'
+          type = 2
 
           case question_type
           when '1'
