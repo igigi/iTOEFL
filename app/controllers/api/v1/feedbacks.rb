@@ -15,9 +15,9 @@ module API
         }
         params do
           requires :content, type: String, desc: "feedback content"
-          requires :device, type: String, desc: "user device model"
-          requires :system, type: String, desc: "user device system version"
-          requires :app_version, type: String, desc: "app version"
+          optional :device, type: String, desc: "user device model"
+          optional :system, type: String, desc: "user device system version"
+          optional :app_version, type: String, desc: "app version"
           requires :contact, type: String, desc: " user contact"
         end
         post do

@@ -9,6 +9,7 @@ class V1::ArticleMarksController < ApplicationController
       @mark.nickname = profile.nickname
     end
 
+
     respond_to do |format|
       if @mark.save
         format.json { head :no_content }
