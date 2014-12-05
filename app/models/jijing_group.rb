@@ -20,6 +20,7 @@ class JijingGroup < ActiveRecord::Base
       # type = 0 未做, type =1 未批, type=2 已批
       type = 0
       if answer
+        answer_id = answer.id
         status = answer.status
         type = 1 if status == '0'
         if status == '1'
@@ -33,7 +34,6 @@ class JijingGroup < ActiveRecord::Base
           end
 
         end
-        answer_id = answer.id if ['0', '3'].include?(status)
       end
       question_message = {id: question.id, sequence_number: question.sequence_number, content: question.content,
         analysis: question.analysis, title: name, answer_id: answer_id, score: score, type: type}

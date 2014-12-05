@@ -21,7 +21,7 @@ module API
           requires :user_id, type: Integer, desc: "user ID"
         end
         post do
-          if current_user.jijing_answers.where("jijing_question_id = ? AND status = ?", params[:jijing_question_id], "0").last.nil?
+          if current_user.jijing_answers.where(jijing_question_id: params[:jijing_question_id]).last.nil?
             JijingAnswer.create!({
               remark: params[:remark],
               content: params[:content],
@@ -31,9 +31,9 @@ module API
               user_id: params[:user_id]
             })
             status 204
-          else            
-            status 401
-            {error: "you have unmark answer"}
+          else
+            status 205
+            {error: "you've done this question"}
           end
         end
 
