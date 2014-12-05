@@ -19,7 +19,7 @@ class JinghuaQuestion < ActiveRecord::Base
       if answer
         answer_id = answer.id
         status = answer.status
-        type = 1 if status == '3'
+        type = 1 if ['0', '3'].include?(status)
         if status == '1'
           type = 2
           score = answer.jinghua_marks.last.score
