@@ -5,7 +5,7 @@ class V1::ArticleMarksController < ApplicationController
     user = User.where(id: params[:article_mark][:user_id]).first
     if user
       profile = user.profile
-      @mark.avatar = profile.avatar
+      @mark.avatar = profile.avatar.url
       @mark.nickname = profile.nickname
     end
 
