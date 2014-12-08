@@ -14,7 +14,7 @@ module API
         desc "Return a oral group"
 
         get ":id", root: :oral_questions do
-          OralGroup.find(params[:id]).oral_questions
+          OralGroup.find(params[:id]).oral_questions.order('CONVERT(sequence_number, SIGNED)')
         end
       end
     end

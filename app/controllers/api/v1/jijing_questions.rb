@@ -26,7 +26,11 @@ module API
           # elsif params[:question_type] == "2"
           #   newest_group.jijing_questions.where(question_type: "2")
           # end
-          newest_group.belong_questions(params[:question_type], current_user.id)
+          if newest_group.present?
+            newest_group.belong_questions(params[:question_type], current_user.id)
+          else
+            {error: 'no data'}
+          end
         end
       end
     end
