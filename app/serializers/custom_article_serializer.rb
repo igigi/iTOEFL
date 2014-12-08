@@ -1,5 +1,7 @@
 class CustomArticleSerializer < ActiveModel::Serializer
   attributes :id, :content, :created_at, :user, :jijing_question
+
+  has_one :user
   
   def user
   	object.user.profile
