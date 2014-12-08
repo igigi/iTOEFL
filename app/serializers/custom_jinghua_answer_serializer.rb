@@ -1,5 +1,7 @@
 class CustomJinghuaAnswerSerializer < ActiveModel::Serializer
-  attributes :id, :content, :remark, :audio_length, :created_at, :user
+  attributes :id, :content, :remark, :audio_length, :created_at
+
+  has_one :user
 
   def user
   	object.user.profile
