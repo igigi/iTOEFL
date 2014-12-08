@@ -36,6 +36,8 @@ class User < ActiveRecord::Base
 
   acts_as_voter
 
+  attr_accessor :nickname
+
   private
 
     def set_auth_token
