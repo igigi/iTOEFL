@@ -7,6 +7,6 @@ class DictationQuestionSerializer < ActiveModel::Serializer
   end
 
   def result_created_at
-    DictationResult.where(user_id: current_user.id).last.created_at
+    current_user.present? ? DictationResult.where(user_id: current_user.id).last.created_at : nil
   end
 end

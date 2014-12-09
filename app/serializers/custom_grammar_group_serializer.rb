@@ -3,6 +3,6 @@ class CustomGrammarGroupSerializer < ActiveModel::Serializer
 
   private
   def result_created_at
-    GrammarResult.where(user_id: current_user.id).order("updated_at").last.created_at
+    current_user.present? ? GrammarResult.where(user_id: current_user.id).order("updated_at").last.created_at : nil
   end
 end
