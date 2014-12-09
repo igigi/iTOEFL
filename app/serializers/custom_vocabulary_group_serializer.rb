@@ -11,7 +11,7 @@ class CustomVocabularyGroupSerializer < ActiveModel::Serializer
   end
 
   def result_created_at
-    current_user.present? ? VocabularyRate.where(user_id: current_user.id).order("updated_at").last.created_at : nil
+    current_user.present? ? VocabularyRate.where(user_id: current_user.id).order("updated_at").last.try(:updated_at) : nil
   end
 
 end
