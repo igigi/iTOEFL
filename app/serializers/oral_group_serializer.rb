@@ -1,6 +1,11 @@
 class OralGroupSerializer < ActiveModel::Serializer
   attributes :id, :sequence_number, :name, :data_url #, :top_score
 
+  private
+  def sequence_number
+    "Unit#{object.sequence_number}"
+  end
+
   def name
     oral_origin = object.oral_origin
     if oral_origin.present?
