@@ -53,6 +53,6 @@ class User < ActiveRecord::Base
     end
 
     def create_default_profile
-      self.create_profile(avatar: "http://newbbs.b0.upaiyun.com/avater/avater.png", nickname: self.nickname)
+      self.create_profile(nickname: self.nickname)
     end
 end
