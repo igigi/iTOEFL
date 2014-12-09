@@ -8,7 +8,11 @@ scheduler.every '30s'  do
     end
 end
 
-scheduler.cron '00 03 * * *' do
-  # every day at 3h00
+# scheduler.cron '00 03 * * *' do
+#   # every day at 3h00
+#   HotExerciseWorker.perform_async
+# end
+
+scheduler.every '600s'  do
   HotExerciseWorker.perform_async
 end

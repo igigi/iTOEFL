@@ -23,13 +23,20 @@ module API
         post do
           status 204
           authenticate!
-          current_user.profile.update({
-            avatar: params[:avatar],
-            nickname: params[:nickname],
-            gender: params[:gender],
-            grade: params[:grade],
-            phone: params[:phone]
-          })
+          # current_user.profile.update({
+          #   avatar: params[:avatar],
+          #   nickname: params[:nickname],
+          #   gender: params[:gender],
+          #   grade: params[:grade],
+          #   phone: params[:phone]
+          # })
+          profile = current_user.profile
+          profile.remote_avatar_url = params[:avatar]
+          profile.nickname = params[:nickname]
+          profile.gender = params[:gender]
+          profile.grade = params[:grade]
+          profile.phone = params[:phone]
+          profile.save
         end
 
         desc "get my profile", {
