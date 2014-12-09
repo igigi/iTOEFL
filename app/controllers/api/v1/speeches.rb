@@ -82,7 +82,7 @@ module API
           elsif params[:sort] == "1"
             (current_user.jinghua_answers.where("status = ? OR status = ?", params[:sort], 2) + current_user.jijing_answers.where("status = ? OR status = ?", params[:sort], 2)).sort_by{ |m| m.created_at }.paginate(:page => params[:page], :per_page => 10)
           else
-            (current_user.jinghua_answers.where(status: 1) + current_user.jijing_answers.where(status: 1)).sort_by{ |m| m.created_at }.paginate(:page => params[:page], :per_page => 10)
+            (current_user.jinghua_answers.where(status: 1) + current_user.jijing_answers.where(status: 1)).sort_by{ |m| m.created_at }.reverse!.paginate(:page => params[:page], :per_page => 10)
           end
         end
 
