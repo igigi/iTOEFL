@@ -21,11 +21,15 @@ class HotExercise < ActiveRecord::Base
         exercises[exercise_class_sym][:hot_exercises].push(question_message)
       end
     end
-    forecast_writings = JijingQuestion.joins(:jijing_group).where(jijing_groups: {group_type: 1}, question_type: 2).order(created_at: :desc).limit(5)
-    forecast_writings.each do |writing|
-      question_message = {id: writing.id, content: writing.content}
-      exercises[:forecast_writings][:hot_exercises].push(question_message)
-    end
+    # forecast_writings = JijingQuestion.joins(:jijing_group).where(jijing_groups: {group_type: 1}, question_type: 2).order(created_at: :desc).limit(5)
+    # last_jijing_group = JijingGroup.where(group_type: 1).order(created_at: :desc).first
+    # if last_jijing_group
+    #   forecast_writings = last_jijing_group.jijing_questions.where(question_type: 2)
+    #   forecast_writings.each do |writing|
+    #     question_message = {id: writing.id, content: writing.content}
+    #     exercises[:forecast_writings][:hot_exercises].push(question_message)
+    #   end
+    # end
     exercises
   end
 end
