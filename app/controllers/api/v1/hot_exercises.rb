@@ -7,7 +7,14 @@ module API
 
       resource :hot_exercises do
 
-        desc "Return hot exercises."
+        desc "Return hot exercises", {
+          headers: {
+            "Authorization" => {
+              description: "Valdates your identity",
+              required: true
+            }
+          }
+        }
 
         get "" do
           HotExercise.hot_exercises(current_user.try(:id))
