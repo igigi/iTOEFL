@@ -26,7 +26,8 @@ class Push
           after_open: "go_custom",
           custom: {
             content_id: "#{message.content_id}",
-            content_type: "#{message.content_type}"
+            content_type: "#{message.content_type}",
+            message_id: "#{message.id}"
           }
         }
       }
@@ -42,7 +43,8 @@ class Push
       payload: {
         aps: {alert: "#{message.content}"},
         content_id: "#{message.content_id}",
-        content_type: "#{message.content_type}"
+        content_type: "#{message.content_type}",
+        message_id: "#{message.id}"
       },
       production_mode: "false"
     }
