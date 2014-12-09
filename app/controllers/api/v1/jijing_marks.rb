@@ -62,7 +62,7 @@ module API
           current_user.jinghua_marks.each do |item|
             jinghua_answer << item.jinghua_answer
           end
-          (jijing_answer + jinghua_answer).sort_by{ |m| m.created_at }.paginate(:page => params[:page], :per_page => 10)
+          (jijing_answer + jinghua_answer).sort_by{ |m| m.created_at }.reverse!.paginate(:page => params[:page], :per_page => 10)
         end
 
         desc "get my article marked statistics for students", {
