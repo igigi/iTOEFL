@@ -38,6 +38,7 @@ gem 'capistrano3-puma', '~>0.7.0'
 gem 'capistrano-bundler'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
+gem 'capistrano-sidekiq' , group: :development
 
 
 # Use debugger

@@ -4,6 +4,10 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
+# https://github.com/seuros/capistrano-sidekiq/issues/23
+set :pty,  false
+set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
+
 role :app, %w{api@api.xiaomatuofu.com}
 role :web, %w{api@api.xiaomatuofu.com}
 role :db,  %w{api@api.xiaomatuofu.com}
@@ -15,7 +19,7 @@ role :db,  %w{api@api.xiaomatuofu.com}
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'api.xiaomatuofu.com', user: 'api', roles: %w{web app}, my_property: 22 
+server 'api.xiaomatuofu.com', user: 'api', roles: %w{web app}, my_property: 22
 
 
 # Custom SSH Options
