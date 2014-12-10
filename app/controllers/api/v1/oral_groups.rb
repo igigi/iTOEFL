@@ -14,7 +14,8 @@ module API
         desc "Return a oral group"
 
         get ":id", root: :oral_questions do
-          OralGroup.find(params[:id]).oral_questions.order('CONVERT(sequence_number, SIGNED)')
+          oral_group = OralGroup.where(id: params[:id]).first
+          oral_group.present? ? oral_group.oral_questions.order('CONVERT(sequence_number, SIGNED)') : {error: 'no data for this id'}
         end
       end
     end
