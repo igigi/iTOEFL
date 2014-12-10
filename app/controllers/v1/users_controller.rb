@@ -44,6 +44,7 @@ class V1::UsersController < ApplicationController
         user.open_id = params[:open_id]
         user.origin = params[:origin]
         user.nickname = params[:nickname]
+        user.avatar = params[:avatar]
         user.save
         render json: user, status: :ok
       else
@@ -130,6 +131,6 @@ class V1::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:captcha, :origin, :open_id, :password, :auth_token, :nickname)
+      params.require(:user).permit(:captcha, :origin, :open_id, :password, :auth_token, :nickname, :avatar)
     end
 end
