@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   acts_as_voter
 
-  attr_accessor :nickname
+  attr_accessor :nickname, :avatar
 
   private
 
@@ -53,6 +53,6 @@ class User < ActiveRecord::Base
     end
 
     def create_default_profile
-      self.create_profile(nickname: self.nickname)
+      self.create_profile(nickname: self.nickname, remote_avatar_url: self.avatar)
     end
 end
