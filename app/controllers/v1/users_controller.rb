@@ -29,11 +29,14 @@ class V1::UsersController < ApplicationController
   end
 
   def login
-    if user = User.find_by(open_id: params[:open_id])
+    if user = User.where(open_id: params[:open_id]).first
+      profile = user.profile
+      user_hash = { user: { id: user.id, origin: user.origin, open_id: user.open_id,
+         auth_token: user.auth_token, password: user.password, nickname: profile.nickname, avatar: profile.avatar.url }}
       if user.origin == "qq" || user.origin == "weibo"
-        render json: user, status: :ok
+        render json: user_hash, status: :ok
       elsif user.password == params[:password]
-        render json: user, status: :ok
+        render json: user_hash, status: :ok
       else
         head 423
       end
@@ -46,7 +49,10 @@ class V1::UsersController < ApplicationController
         user.nickname = params[:nickname]
         user.avatar = params[:avatar]
         user.save
-        render json: user, status: :ok
+        profile = user.profile
+        user_hash = { user: { id: user.id, origin: user.origin, open_id: user.open_id,
+         auth_token: user.auth_token, password: user.password, nickname: profile.nickname, avatar: profile.avatar.url }}
+        render json: user_hash, status: :ok
       else
         head 404
       end
@@ -89,7 +95,10 @@ class V1::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.json { render json: @user, status: :created }
+        profile = @user.profile
+        user_hash = { user: { id: @user.id, origin: @user.origin, open_id: @user.open_id,
+           auth_token: @user.auth_token, password: @user.password, nickname: profile.nickname, avatar: profile.avatar.url }}
+        format.json { render json: user_hash, status: :created }
       else
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
