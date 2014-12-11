@@ -49,7 +49,7 @@ class HotExercise < ActiveRecord::Base
 
     last_jijing_group = JijingGroup.where(group_type: 1).order(created_at: :desc).first
     if last_jijing_group
-      forecast_writings = last_jijing_group.jijing_questions.where(question_type: 2)
+      forecast_writings = last_jijing_group.jijing_questions.where(question_type: 2).limit(5)
       forecast_writings.each do |writing|
         answer_id = nil
         score = 0
