@@ -28,7 +28,7 @@ module API
           if params[:page]
             vocabulary_questions.paginate(page: params[:page], per_page: 10)
           else
-            vocabulary_questions.sort_by { |a| -(a.sequence_number.to_i) }
+            vocabulary_questions.sort_by { |a| a.sequence_number.to_i }
           end
         end
       end
