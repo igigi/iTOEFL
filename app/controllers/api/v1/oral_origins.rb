@@ -7,7 +7,7 @@ module API
 
         desc "get all oral origin"
         get "" do
-          OralOrigin.all
+          OralOrigin.joins(:oral_groups).distinct.order('oral_origins.id desc')
         end
 
         desc "get oral groups", {
@@ -20,7 +20,8 @@ module API
         }
 
         get ":id", root: :oral_groups do
-          OralOrigin.find(params[:id]).oral_groups
+          oral_origin = OralOrigin.where(id: params[:id]).first
+          oral_origin.present? ? oral_origin.oral_groups : {error: 'no data for this id'}
         end
       end
     end

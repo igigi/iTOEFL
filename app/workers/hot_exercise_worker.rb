@@ -24,7 +24,6 @@ class HotExerciseWorker
     hot_grammar_ids = HotExercise.where(hot_type: 2).order(counter: :desc).ids
     hot_grammar_count = hot_grammar_ids.size
     grammar_results.each_with_index do |hot_grammar, idx|
-      puts "~~~~grammar_group_id~~~#{hot_grammar.grammar_group_id}"
       next unless GrammarGroup.where(id: hot_grammar.grammar_group_id).exists?
       if hot_grammar_count >= (idx + 1)
         hot_exercise = HotExercise.find(hot_grammar_ids[idx])
