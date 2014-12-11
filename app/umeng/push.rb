@@ -41,7 +41,7 @@ class Push
       alias: "#{user.open_id}",
       alias_type: "tuofu",
       payload: {
-        aps: {alert: "#{message.content}"},
+        aps: {alert: "#{message.content}", badge: 1},
         content_id: "#{message.content_id}",
         content_type: "#{message.content_type}",
         message_id: "#{message.id}"
